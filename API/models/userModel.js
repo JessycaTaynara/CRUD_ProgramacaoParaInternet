@@ -26,7 +26,7 @@ class userModel {
   async remove(email) {
     const conexao = await bancoDeDados.conectar();
     const comandoSql = 'DELETE FROM users where email=$1;';
-    return users.row;
+    return await conexao.query(comandoSql, [email])
   }
   
 }

@@ -26,15 +26,19 @@ class userController {
   async create(req, res) {
     const { email, senha } = req.body;
     try {
-        const result = await userModel.createUser(email, senha);
-        if (result.success) {
-            return res.status(200).json(result.user); 
-        } else {
-            return res.status(404).json({ message: "Erro ao criar ou atualizar usuário" });
-        }
+        const user = await userModel.createUser(email, senha);
+        return res.status(200).send(user); 
     } catch (error) {
-        return res.status(500).json({ message: `Erro ao criar usuário - ${error}` }); 
+        return res.status(500).send({ message: `Erro ao criar usuário - ${error}` }); 
     }
+  }
+  async remove(req, res) {
+    const email = req.params.email;
+    //const user = await userModel.find(email)
+    //if (!user)
+      //return res.status(404).send({ message: "Usuário não encontrado" });
+    await userModel.remove(email);
+    res.status(200).send({ message: "Usuário deletado" });
   }
 
 }
