@@ -7,6 +7,13 @@ class gatoModel {
       "INSERT INTO gatos (nome, idade, sexo, raca, cor, descricao) VALUES ($1, $2, $3,$4, $5, $6)";
     return await conn.query(sql, [nome, idade, sexo, raca, cor, descricao]);
   }
+  async get_gatos(){
+    const conn = await bancoDeDados.conectar();
+    const sql =
+      "SELECT * FROM gatos";
+    const gatos = await conn.query(sql);
+    return gatos.rows
+  }
 }
 
 export default new gatoModel();
