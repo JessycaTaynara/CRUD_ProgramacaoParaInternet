@@ -47,40 +47,40 @@ exibirGatos();
         const caixa = document.querySelector('div.container');
         caixa.innerHTML="";
         gatos.forEach(gato => {
-          console.log(gatos)
-          caixa.innerHTML += `
-          <div class="card" style="width: 18rem;">
-            <div class="card-body  d-flex flex-column">
-              <h5 class="card-title">${gato.nome}</h5>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Idade
-                  <span class="badge bg-primary rounded-pill">${gato.idade}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Sexo
-                  <span class="badge bg-primary rounded-pill">${gato.sexo}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Raça
-                  <span class="badge bg-primary rounded-pill">${gato.raca}</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Cor
-                  <span class="badge bg-primary rounded-pill">${gato.cor}</span>
-                </li>
-                <li class="list-group-item d-flex flex-column justify-content-between align-items-center">
-                  <strong>Descrição:</strong><br>
-                  <p>${gato.descricao}</p>
-                </li>
-              </ul>
-              <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar(${gato.nome})">Adote</button>
-              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato(${gato.nome})">Edite</button>
+          if(gato.adotado == false){
+            caixa.innerHTML += `
+            <div class="card" style="width: 18rem;">
+              <div class="card-body  d-flex flex-column">
+                <h5 class="card-title">${gato.nome}</h5>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Idade
+                    <span class="badge bg-primary rounded-pill">${gato.idade}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sexo
+                    <span class="badge bg-primary rounded-pill">${gato.sexo}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Raça
+                    <span class="badge bg-primary rounded-pill">${gato.raca}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Cor
+                    <span class="badge bg-primary rounded-pill">${gato.cor}</span>
+                  </li>
+                  <li class="list-group-item d-flex flex-column justify-content-between align-items-center">
+                    <strong>Descrição:</strong><br>
+                    <p>${gato.descricao}</p>
+                  </li>
+                </ul>
+                <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar(${gato.nome})">Adote</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato(${gato.nome})">Edite</button>
+              </div>
             </div>
-          </div>
-          `
-        });
-        
+            `
+          };
+        })
       }catch(error) {
         alert(error.mensagem);
       }
@@ -90,7 +90,7 @@ exibirGatos();
         var resposta = await fetch('https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010034/products/' + id, { method: "DELETE" });
         exibirGatos();
       }catch(error){
-        console.log(error)
+        alert(error.mensagem)
       }
     }
     async function editarGato(id) {
