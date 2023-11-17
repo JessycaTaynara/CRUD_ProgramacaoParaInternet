@@ -12,11 +12,11 @@ exibirGatos();
         sexo: sexo,
         idade: idade,
         raca: raca,
-        cor: cor == undefined? "" : cor,
+        cor: cor,
         descricao: decricao
       };
       try{
-        const r = await fetch('https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010034/products', {
+        const r = await fetch('http://localhost:3000/addGato', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -24,7 +24,7 @@ exibirGatos();
         body: JSON.stringify(gato)
         })
       }catch(error) {
-      console.error('Erro ao adicionar gato:', error);
+        alert(error.mensagem);
       };
 
       document.getElementById("nome").value = "";
@@ -42,7 +42,7 @@ exibirGatos();
     }
     async function exibirGatos() {
       try{
-        var r = await fetch('https://649a1d4a79fbe9bcf8404b5a.mockapi.io/users/20201214010034/products')
+        var r = await fetch('http://localhost:3000/gatos')
         const gatos = await r.json();
         const caixa = document.querySelector('div.container');
         caixa.innerHTML="";
@@ -74,15 +74,15 @@ exibirGatos();
                   <p>${gato.descricao}</p>
                 </li>
               </ul>
-              <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar(${gato.id})">Adote</button>
-              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato(${gato.id})">Edite</button>
+              <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar(${gato.nome})">Adote</button>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato(${gato.nome})">Edite</button>
             </div>
           </div>
           `
         });
         
       }catch(error) {
-        console.error(error);
+        alert(error.mensagem);
       }
     }
     async function adotar(id) {
