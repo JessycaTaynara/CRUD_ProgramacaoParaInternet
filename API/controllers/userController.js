@@ -1,18 +1,6 @@
 import userModel from "../models/userModel.js";
 
 class userController {
-  async login(req, res) {
-    const { email, senha } = req.body;
-    try {
-      const user = await userModel.login(email, senha);
-      if (user.length == 0) {
-        return res.status(404).send({ mensagem: "Email ou senha incorretos" });
-      }
-      return res.status(200).send(user[0]);
-    } catch (error) {
-      return res.status(404).send({ mensagem: `Erro ao logar - ${error}` });
-    }
-  }
   async show(req, res) {
     try {
       const users = await userModel.show();
