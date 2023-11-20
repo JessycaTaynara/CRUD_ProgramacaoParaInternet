@@ -1,3 +1,4 @@
+import gatoModel from "../models/gatoModel.js";
 import userModel from "../models/userModel.js";
 
 class userController {
@@ -29,6 +30,16 @@ class userController {
     //return res.status(404).send({ mensagem: "Usuário não encontrado" });
     await userModel.remove(email);
     res.status(200).send({ mensagem: "Usuário deletado" });
+  }
+  async adotar(req, res){
+    const {nomeGato, emailDono} = req.body
+    console.log(nomeGato, emailDono)
+    try{
+      await userModel.fazerAdocao(nomeGato, emailDono)
+      res.status(200).send({mensagem: `Gato ${nomeGato} adotado!`})
+    }catch(error){
+      res.status(500).send({mensagem: `Erro ao adotar - ${error}`})
+    }
   }
 }
 

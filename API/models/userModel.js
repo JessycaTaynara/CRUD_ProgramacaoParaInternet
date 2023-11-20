@@ -21,5 +21,16 @@ class userModel {
     const sql = "DELETE FROM users where email=$1;";
     return await conn.query(sql, [email]);
   }
+  async getAdocoes(email){
+    const conn = await bancoDeDados.conectar();
+    const sql = "SELECT * FROM adocoes WHERE dono = ($1)";
+    const adocoes = await conn.query(sql, [email]);
+    return adocoes.rows
+  }
+  async fazerAdocao(nomeGato, emailDono){
+    const conn = await bancoDeDados.conectar();
+    const sql = "INSERT INTO adocoes (dono, gato) VALUES ($1, $2); UPDATE gatos SET adotado = true WHERE nome = ($3);";
+    return await conn.query(sql, [emailDono, nomeGato, nomeGato]);
+  }
 }
 export default new userModel();
