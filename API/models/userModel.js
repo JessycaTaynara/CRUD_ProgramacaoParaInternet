@@ -29,8 +29,10 @@ class userModel {
   }
   async fazerAdocao(nomeGato, emailDono){
     const conn = await bancoDeDados.conectar();
-    const sql = "INSERT INTO adocoes (dono, gato) VALUES ($1, $2); UPDATE gatos SET adotado = true WHERE nome = ($3);";
-    return await conn.query(sql, [emailDono, nomeGato, nomeGato]);
+    const sql1 = "INSERT INTO adocoes (dono, gato) VALUES ($1, $2)";
+    const sql2 = "UPDATE gatos SET adotado = true WHERE nome = ($1)"
+    await conn.query(sql1, [emailDono, nomeGato]);
+    await conn.query(sql2, [nomeGato])
   }
 }
 export default new userModel();
