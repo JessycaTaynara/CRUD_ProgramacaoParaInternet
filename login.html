@@ -112,10 +112,10 @@
 
             if (tokenData.token) {
             // Login bem-sucedido
-            localStorage.clear();
-            localStorage.setItem('token', tokenData.token);
-            window.location.href = './sistema/index.html';
-            } else {
+              localStorage.clear();
+              localStorage.setItem('token', tokenData.token);
+              window.location.href = './sistema/index.html';
+              } else {
             // Falha no login
             alert("Acesso negado | " + tokenData.mensagem);
             }
