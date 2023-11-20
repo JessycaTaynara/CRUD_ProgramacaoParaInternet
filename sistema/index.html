@@ -14,32 +14,13 @@
         </form>
       </div>
       <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modal1">Adicionar gato</button>
-      <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modal1">Meus Gatos Adotados</button>
+      <a href="./adotados.html"><button type="button" class="btn btn-light">Meus Gatos Adotados</button></a>
+      <button type="button" class="btn btn-light" onclick="logout()">Sair</button>
     </nav>
   </header>
   <main class="mt-4">
     <div class="container d-flex flex-wrap justify-content-around">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body  d-flex flex-column">
-          <h5 class="card-title">Antônio</h5>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Idade
-              <span class="badge bg-primary rounded-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Sexo
-              <span class="badge bg-primary rounded-pill">Macho</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              Raça
-              <span class="badge bg-primary rounded-pill">Viralata</span>
-            </li>
-          </ul>
-          <button type="button" class="btn btn-secondary mb-2 mt-2">Adote</button>
-          <button type="button" class="btn btn-secondary">Edite</button>
-        </div>
-      </div>
+      
     </div>
   </main>
   <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -88,7 +69,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastre um gatinho</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edite um gatinho</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal2" aria-label="Close"></button>
         </div>
         <div class="modal-body">
