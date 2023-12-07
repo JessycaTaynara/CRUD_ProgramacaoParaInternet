@@ -4,8 +4,6 @@
 
 O Sistema de Adoção de Gatos é uma plataforma que permite aos usuários adotar gatos ou publicar gatos disponíveis para adoção. A ideia é criar uma comunidade dedicada ao cuidado e bem-estar dos felinos, conectando pessoas interessadas em adotar com gatos que precisam de um lar amoroso.
 
-<img src="https://i.gifer.com/VeC.gif" width="100" alt="Gato Fofo">
-
 ## Funcionalidades do Usuário Comum👤
 
 ### 1. Adoção de Gatos😻
@@ -26,8 +24,10 @@ O administrador pode **criar, editar ou deletar** um gato no sistema. Ao criar u
 
 O administrador pode ver quais gatos foram adotados e por quem
 
-## Contribuidores
+## Contribuidores 👩‍💻
 
 Sabrina Bezerra da Silva - <a href="https://github.com/sabiss">Sabiss</a>
 
 Jéssyca Taynara Teixeira de Medeiros - <a href="https://github.com/JessycaTaynara">JessycaTaynara</a>
+
+![Gato Fofo](https://i.gifer.com/VeC.gif)
