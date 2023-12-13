@@ -8,7 +8,7 @@
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jéssyca Taynara",
+  "author": "Jéssyca Taynara e Sabrina Bezerra",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
