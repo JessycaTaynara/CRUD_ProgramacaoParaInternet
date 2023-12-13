@@ -24,6 +24,22 @@ O administrador pode **criar, editar ou deletar** um gato no sistema. Ao criar u
 
 O administrador pode ver quais gatos foram adotados e por quem
 
+## Entenda Nossos Commits
+
+Em nosso projeto iremos utilizar um padrão de commits da seguinte forma
+
+_TIPO DA ACAO : Pequena descrição do que foi feito_
+
+### Quais São Os Tipos de Ação
+
+- **FEAT:** novas funcionalidades
+- **FIX:** corrigir erros
+- **DOCS:** atualizar documentações
+- **STYLE:** atualizar estilos ou arquivos de estilização
+- **REFACTOR:** refatorar/melhorar código, mas sem mudar sua funcionalidade
+- **TEST:** criar, ajustar e refatorar testes
+- **CHORE:** alterações no código fonte como instalação de bibliotecas, configuração do package.json etc
+
 ## Contribuidores 👩‍💻
 
 Sabrina Bezerra da Silva - <a href="https://github.com/sabiss">Sabiss</a>
