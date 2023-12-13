@@ -1,129 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Login</title>
-  <style>
-    body {
-      background-color: #D291BC;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tela de Login</title>
+    <style>
+      body {
+        background-color: #d291bc;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
 
-    .login-container {
-      background-color: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 300px;
-    }
+      .login-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 300px;
+      }
 
-    .login-header {
-      background-color: #D291BC;
-      color: #ffffff;
-      text-align: center;
-      padding: 20px;
-    }
+      .login-header {
+        background-color: #d291bc;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+      }
 
-    .login-form {
-      padding: 20px;
-    }
+      .login-form {
+        padding: 20px;
+      }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+      .form-group {
+        margin-bottom: 20px;
+      }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: #555555;
-    }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555555;
+      }
 
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      border: 1px solid #dddddd;
-      border-radius: 4px;
-    }
+      .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        border-radius: 4px;
+      }
 
-    .form-group button {
-      background-color: #D291BC;
-      color: #ffffff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-    }
+      .form-group button {
+        background-color: #d291bc;
+        color: #ffffff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
 
-    .form-group button:hover {
-      background-color: #A94E77;
-    }
-  </style>
-</head>
-<body>
-
-<div class="login-container">
-  <div class="login-header">
-    <h2>Tela de Login</h2>
-  </div>
-  <div class="login-form">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" placeholder="Seu email" required>
+      .form-group button:hover {
+        background-color: #a94e77;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-header">
+        <h2>Tela de Login</h2>
+      </div>
+      <div class="login-form">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="Seu email" required />
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" placeholder="Sua senha" required />
+        </div>
+        <div class="form-group">
+          <button type="button" onclick="login()">Entrar</button>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" placeholder="Sua senha" required>
-    </div>
-    <div class="form-group">
-      <button type="button" onclick="login()">Entrar</button>
-    </div>
-  </div>
-</div>
-<script>
-    async function login() {
-        localStorage.clear()
-        const email = document.getElementById('email').value;
-        const senha = document.getElementById('senha').value;
-
-        const data = {
-            email: email,
-            senha: senha
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-            });
-
-            const tokenData = await response.json();
-
-            if (tokenData.token) {
-            // Login bem-sucedido
-              localStorage.clear();
-              localStorage.setItem('token', tokenData.token);
-              window.location.href = './sistema/index.html';
-              } else {
-            // Falha no login
-            alert("Acesso negado | " + tokenData.mensagem);
-            }
-        } catch (error) {
-            console.error('Erro na solicitação:', error);
-        }
-    };
-</script>
-</body>
-
+    <script src="./login.js"></script>
+  </body>
 </html>
