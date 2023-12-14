@@ -68,4 +68,30 @@ function mostrarAlerta(mensagem, tipo){
 
   texto.innerHTML = mensagem
 }
+async function cadastrar(){
+  const email = document.querySelector("input#email").value
+  const senha = document.querySelector("input#senha").value
 
+  const data = {email, senha}
+
+  try {
+    const retorno = await fetch(`${urlBase}/cadastrarUsuarioComum`,{
+      method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+
+    const mensagemDeRetorno = await retorno.json()
+
+    if(retorno.ok){
+      mostrarAlerta(mensagemDeRetorno.message, "sucesso")
+    }else{
+      mostrarAlerta(mensagemDeRetorno, "erro")
+    }
+  } catch (error) {
+    mostrarAlerta(error, "erro")
+  }
+  
+}
