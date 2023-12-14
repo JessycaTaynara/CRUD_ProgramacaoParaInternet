@@ -1,3 +1,5 @@
+const urlBase = "http://localhost:3000"
+
 async function login() {
   localStorage.clear();
   const email = document.getElementById("email").value;
@@ -9,7 +11,7 @@ async function login() {
   };
 
   try {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch(`${urlBase}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,3 +68,4 @@ function mostrarAlerta(mensagem, tipo){
 
   texto.innerHTML = mensagem
 }
+
