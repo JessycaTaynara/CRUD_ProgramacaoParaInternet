@@ -23,18 +23,46 @@ async function login() {
       // Login bem-sucedido
       localStorage.clear();
       localStorage.setItem("token", tokenData.token);
+
       const payload = JSON.parse(atob(decodeURIComponent(token.split(".")[1])));
+
       if(payload.tipo === "adm"){
         window.location.assign("./src/Administrador/home/index.html");
       }else if(payload.tipo === "comum"){
         window.location.assign("./src/UsuárioComum/home/index.html");
+      }else{
+        mostrarAlerta("Erro ao reconhecer tipo do usuário", "erro")
       }
     } else {
       // Falha no login
-      alert("Acesso negado | " + tokenData.mensagem);
+      mostrarAlerta(`Acesso negado: ${tokenData.mensagem}`, "erro");
     }
   } catch (error) {
-    console.error("Erro na solicitação:", error);
+    mostrarAlerta(`Erro na solicitação: ${error}`, "erro");
   }
 }
+function mostrarAlerta(mensagem, tipo){
+  const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
+  const texto = document.querySelector("strong#mensagemDeAlerta")
 
+  caixaDeAlerta.classList.remove("d-none")
+  caixaDeAlerta.classList.add("d-flex")
+
+  caixaDeAlerta.classList.remove("alert-success")
+  caixaDeAlerta.classList.remove("alert-danger")
+  caixaDeAlerta.classList.remove("alert-warning")
+  
+  switch(tipo){
+    case "erro":
+      caixaDeAlerta.classList.add("alert-danger")
+      break
+    case "alerta":
+      caixaDeAlerta.classList.add("alert-warning")
+      break
+    case "sucesso":
+      caixaDeAlerta.classList.add("alert-success")
+      break
+  }
+
+  texto.innerHTML = mensagem
+}
