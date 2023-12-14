@@ -23,7 +23,12 @@ async function login() {
       // Login bem-sucedido
       localStorage.clear();
       localStorage.setItem("token", tokenData.token);
-      window.location.href = "./sistema/index.html";
+      const payload = JSON.parse(atob(decodeURIComponent(token.split(".")[1])));
+      if(payload.tipo === "adm"){
+        window.location.assign("./src/Administrador/home/index.html");
+      }else if(payload.tipo === "comum"){
+        window.location.assign("./src/UsuárioComum/home/index.html");
+      }
     } else {
       // Falha no login
       alert("Acesso negado | " + tokenData.mensagem);
@@ -32,3 +37,4 @@ async function login() {
     console.error("Erro na solicitação:", error);
   }
 }
+
