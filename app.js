@@ -1,8 +1,8 @@
 import express from "express"
 import cors from "cors"
-import usuario from "./API/routes/userRoutes.js"
-import gato from "./API/routes/gatoRoutes.js"
-import login from "./API/routes/authRoutes.js"
+import usuario from "./src/routes/userRoutes.js"
+import gato from "./src/routes/gatoRoutes.js"
+import login from "./src/routes/authRoutes.js"
 
 const app = express()
 
