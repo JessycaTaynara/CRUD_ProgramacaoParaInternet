@@ -1,0 +1,72 @@
+exibirGatos();
+  async function exibirGatos() {
+    try{
+      var r = await fetch('http://localhost:3000/gatos')
+      const gatos = await r.json();
+      const caixa = document.querySelector('div.container');
+      caixa.innerHTML="";
+      gatos.forEach(gato => {
+        if(gato.adotado == false){
+          caixa.innerHTML += `
+            <div class="card mb-3" style="width: 18rem;">
+              <div class="card-body  d-flex flex-column">
+                <h5 class="card-title">${gato.nome}</h5>
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Idade
+                    <span class="badge bg-primary rounded-pill">${gato.idade}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Sexo
+                    <span class="badge bg-primary rounded-pill">${gato.sexo}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Raça
+                    <span class="badge bg-primary rounded-pill">${gato.raca}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Cor
+                    <span class="badge bg-primary rounded-pill">${gato.cor}</span>
+                  </li>
+                  <li class="list-group-item d-flex flex-column justify-content-between align-items-center">
+                    <strong>Descrição:</strong><br>
+                    <p>${gato.descricao}</p>
+                  </li>
+                </ul>
+                <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar('${gato.nome}')">Adote</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato('${gato.nome}')">Edite</button>
+              </div>
+            </div>
+            `
+        }
+      })
+      if(caixa.innerHTML == ""){
+        caixa.innerHTML = "<h1>Não há gatos para adotar, adicione</h1>"
+      }
+    }catch(error) {
+      alert(error.mensagem);
+    }
+  }
+  async function adotar(nomeGato) {
+    const token = localStorage.getItem('token')
+    const emailDono = (JSON.parse(atob(token.split(".")[1]))).email
+    try{
+      const resp = await fetch('http://localhost:3000/adotarGato', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({nomeGato, emailDono})
+      })
+      const mensagem = await resp.json()
+      alert(mensagem.mensagem)
+      exibirGatos();
+    }catch(error){
+      alert(error.mensagem)
+    }
+  }
+  async function logout(){
+    localStorage.clear()
+    window.location.href = '../login.html';
+  }
+  
