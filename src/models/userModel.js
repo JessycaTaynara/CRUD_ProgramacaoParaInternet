@@ -7,11 +7,11 @@ class userModel {
     const users = await conn.query(sql);
     return users.rows;
   }
-  async createUser(email, senha, tipo) {
+  async createUser(email, senha, tipo, nome) {
     const conn = await bancoDeDados.conectar();
-    const sql = `INSERT INTO usuarios (email, senha, tipo)
-    VALUES ($1, $2, $3);`;
-    const values = [email, senha, tipo];
+    const sql = `INSERT INTO usuarios (email, senha, nome, tipo)
+    VALUES ($1, $2, $3, $4);`;
+    const values = [email, senha, nome, tipo];
     await conn.query(sql, values);
   }
   async remove(email) {
