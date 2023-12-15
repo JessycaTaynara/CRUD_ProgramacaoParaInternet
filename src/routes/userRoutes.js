@@ -4,7 +4,8 @@ import userController from "../controllers/userController.js";
 const routes = new Router();
 
 routes
-  .get("/", userController.show)
+  .get("/usuarios", userController.show)
+  .get("/minhasAdocoes/:email", userController.getMeusGatosAdotados)
 
   .post("/users", userController.createUser)
   .post("/adotarGato", userController.adotar)

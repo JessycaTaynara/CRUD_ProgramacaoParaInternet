@@ -1,4 +1,5 @@
 import userModel from "../models/userModel.js";
+import gatoModel from "../models/gatoModel.js";
 
 class userController {
   async show(req, res) {
@@ -46,6 +47,31 @@ class userController {
       res.status(200).send({ mensagem: `Gato ${idGato} adotado!` });
     } catch (error) {
       res.status(500).send({ mensagem: `Erro ao adotar - ${error}` });
+    }
+  }
+  async getMeusGatosAdotados(req, res) {
+    const email = req.params.email;
+    try {
+      const adocoes = await userModel.getMinhasAdocoes(email);
+
+      if (adocoes.length == 0) {
+        return res
+          .status(500)
+          .send({ mensagem: "Você não adotou nenhum gato" });
+      }
+
+      const listaGatos = [];
+
+      for (let adocao of adocoes) {
+        const dadosDoGato = await gatoModel.getGatoPorId(adocao.gato.id);
+        listaGatos.push(dadosDoGato);
+      }
+
+      return res.status(200).send(listaGatos);
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ mensagem: `Erro ao buscar seus gatos adotados - ${error}` });
     }
   }
 }
