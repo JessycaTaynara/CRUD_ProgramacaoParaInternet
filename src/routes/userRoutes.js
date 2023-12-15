@@ -5,8 +5,10 @@ const routes = new Router();
 
 routes
   .get("/", userController.show)
-  .post("/users", userController.create)
-  .delete("/deletarUser/:email", userController.remove)
+
+  .post("/users", userController.createUser)
   .post("/adotarGato", userController.adotar)
+
+  .delete("/deletarUser/:email", userController.remove);
 
 export default routes;

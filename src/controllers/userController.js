@@ -1,4 +1,3 @@
-import gatoModel from "../models/gatoModel.js";
 import userModel from "../models/userModel.js";
 
 class userController {
@@ -12,7 +11,7 @@ class userController {
         .send({ mensagem: `Erro ao listar usuários - ${error}` });
     }
   }
-  async create(req, res) {
+  async createUser(req, res) {
     const { email, senha } = req.body;
     try {
       const user = await userModel.createUser(email, senha);
@@ -25,20 +24,28 @@ class userController {
   }
   async remove(req, res) {
     const email = req.params.email;
-    //const user = await userModel.find(email)
-    //if (!user)
-    //return res.status(404).send({ mensagem: "Usuário não encontrado" });
-    await userModel.remove(email);
-    res.status(200).send({ mensagem: "Usuário deletado" });
+    try {
+      const user = await userModel.find(email);
+
+      if (!user) {
+        return res.status(404).send({ mensagem: "Usuário não encontrado" });
+      }
+
+      await userModel.remove(email);
+      return res.status(200).send({ mensagem: "Usuário deletado" });
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: "Erro ao remover usuário - " + error });
+    }
   }
-  async adotar(req, res){
-    const {nomeGato, emailDono} = req.body
-    console.log(nomeGato, emailDono)
-    try{
-      await userModel.fazerAdocao(nomeGato, emailDono)
-      res.status(200).send({mensagem: `Gato ${nomeGato} adotado!`})
-    }catch(error){
-      res.status(500).send({mensagem: `Erro ao adotar - ${error}`})
+  async adotar(req, res) {
+    const { idGato, emailDono } = req.body;
+    try {
+      await userModel.fazerAdocao(idGato, emailDono);
+      res.status(200).send({ mensagem: `Gato ${idGato} adotado!` });
+    } catch (error) {
+      res.status(500).send({ mensagem: `Erro ao adotar - ${error}` });
     }
   }
 }
