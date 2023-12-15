@@ -1,17 +1,9 @@
-/*Tabela Administradores*/
-CREATE TABLE administradores (
-    email VARCHAR(255) PRIMARY KEY,
-    senha VARCHAR(255) NOT NULL,
-	nome VARCHAR(255) NOT NULL, 
-    tipo VARCHAR(255) NOT NULL DEFAULT 'adm'
-);
-
-/*Tabela usuarios_comuns*/
-CREATE TABLE usuarios_comuns (
+/*Tabela usuarios*/
+CREATE TABLE usuarios (
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) PRIMARY KEY,
     senha VARCHAR(255) NOT NULL,
-    tipo VARCHAR(255) NOT NULL DEFAULT 'comum'
+    tipo VARCHAR(255) NOT NULL
 );
 
 /*Tabela gatos*/
