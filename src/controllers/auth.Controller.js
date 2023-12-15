@@ -11,7 +11,7 @@ class authController {
         return res.status(404).send({ mensagem: "Email ou senha incorretos" });
       }
 
-      const token = jwt.sign({ email: email }, "jessyca");
+      const token = jwt.sign({ email: user.email, nome: user.nome }, "jessyca");
       return res.status(200).send({ mensagem: "Logado com sucesso", token });
     } catch (error) {
       return res.status(404).send({ mensagem: `Erro ao logar - ${error}` });
