@@ -1,11 +1,11 @@
 import bancoDeDados from "../database/index.js";
 
 class gatoModel {
-  async adicionarGato(nome, idade, sexo, raca, cor, descricao) {
+  async adicionarGato(nome, sexo, raca, cor, descricao) {
     const conn = await bancoDeDados.conectar();
     const sql =
-      "INSERT INTO gatos (nome, idade, sexo, raca, cor, descricao) VALUES ($1, $2, $3,$4, $5, $6)";
-    return await conn.query(sql, [nome, idade, sexo, raca, cor, descricao]);
+      "INSERT INTO gatos (nome, sexo, raca, cor, descricao) VALUES ($1, $2, $3,$4, $5)";
+    return await conn.query(sql, [nome, sexo, raca, cor, descricao]);
   }
   async getGatos() {
     const conn = await bancoDeDados.conectar();
@@ -29,18 +29,17 @@ class gatoModel {
     const sql = "DELETE FROM adocoes WHERE gato = ($1)";
     return await conn.query(sql, [nomeGato]);
   }
-  async update(nomeAntigo, novoNome, idade, sexo, raca, cor, descricao) {
+  async update(novoNome, novoSexo, novaRaca, novaCor, novaDescricao, id) {
     const conn = await bancoDeDados.conectar();
     const sql =
-      "UPDATE gatos SET nome = ($1), idade = ($2), sexo = ($3), raca = ($4), cor = ($5), descricao = ($6) WHERE nome = ($7)";
+      "UPDATE gatos SET nome = ($1), sexo = ($2), raca = ($3), cor = ($4), descricao = ($5) WHERE id = ($6)";
     return await conn.query(sql, [
       novoNome,
-      idade,
-      sexo,
-      raca,
-      cor,
-      descricao,
-      nomeAntigo,
+      novoSexo,
+      novaRaca,
+      novaCor,
+      novaDescricao,
+      id,
     ]);
   }
 }
