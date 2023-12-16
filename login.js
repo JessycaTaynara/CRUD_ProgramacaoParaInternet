@@ -26,7 +26,7 @@ async function login() {
       window.location.href = "./sistema/index.html";
     } else {
       // Falha no login
-      alert("Acesso negado | " + tokenData.mensagem);
+      alert("Acesso negado | " + tokenData.message);
     }
   } catch (error) {
     console.error("Erro na solicitação:", error);

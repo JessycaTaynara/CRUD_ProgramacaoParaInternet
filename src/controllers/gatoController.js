@@ -5,11 +5,9 @@ class gatoController {
     const { nome, idade, sexo, raca, cor, descricao } = req.body;
     try {
       await gatoModel.adicionarGato(nome, idade, sexo, raca, cor, descricao);
-      res.status(200).send({ mensagem: "Gato adicionado" });
+      res.status(200).send({ message: "Gato adicionado" });
     } catch (error) {
-      res
-        .status(500)
-        .send({ mensagem: `Erro ao adicionar um gato - ${error}` });
+      res.status(500).send({ message: `Erro ao adicionar um gato - ${error}` });
     }
   }
   async getGatos(req, res) {
@@ -17,7 +15,7 @@ class gatoController {
       const gatos = await gatoModel.getGatos();
       res.status(200).send(gatos);
     } catch (error) {
-      res.status(404).send({ mensagem: `Erro ao listar gatos - ${error}` });
+      res.status(404).send({ message: `Erro ao listar gatos - ${error}` });
     }
   }
   async excluirGato(req, res) {
@@ -25,18 +23,18 @@ class gatoController {
     console.log(nomeGato);
     try {
       await gatoModel.deleteGato(nomeGato);
-      res.status(200).send({ mensagem: "Gato excluido" });
+      res.status(200).send({ message: "Gato excluido" });
     } catch (error) {
-      res.status(404).send({ mensagem: `Erro ao deletar gato - ${error}` });
+      res.status(404).send({ message: `Erro ao deletar gato - ${error}` });
     }
   }
   async deletarAdocao(req, res) {
     const { nomeGato } = req.body;
     try {
       await gatoModel.deletarAdocao(nomeGato);
-      res.status(200).send({ mensagem: "adocao excluida" });
+      res.status(200).send({ message: "adocao excluida" });
     } catch (error) {
-      res.status(404).send({ mensagem: `Erro ao deletar adocao - ${error}` });
+      res.status(404).send({ message: `Erro ao deletar adocao - ${error}` });
     }
   }
   async editarGato(req, res) {
@@ -52,9 +50,9 @@ class gatoController {
         cor,
         descricao
       );
-      return res.status(200).send({ mensagem: "Gato atualizado com sucesso!" });
+      return res.status(200).send({ message: "Gato atualizado com sucesso!" });
     } catch (error) {
-      res.status(500).send({ mensagem: `Erro ao atualizar gato - ${error}` });
+      res.status(500).send({ message: `Erro ao atualizar gato - ${error}` });
     }
   }
 }

@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    />
     <title>Gatitos Para Adotar - Adotados</title>
     <style>
-        body{
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            background-color: #D291BC;
-        }
+      body {
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #d291bc;
+      }
     </style>
-</head>
-<body>
-    
+  </head>
+  <body>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            carregarCard()
-        });
-        async function carregarCard(){
-            const token = localStorage.getItem('token')
-            const email = (JSON.parse(atob(token.split(".")[1]))).email
-            try{
-                const resp = await fetch(`http://localhost:3000/meusGatosAdotados/${email}`)
-                const gatos = await resp.json()
+      document.addEventListener("DOMContentLoaded", function () {
+        carregarCard();
+      });
+      async function carregarCard() {
+        const token = localStorage.getItem("token");
+        const email = JSON.parse(atob(token.split(".")[1])).email;
+        try {
+          const resp = await fetch(
+            `http://localhost:3000/meusGatosAdotados/${email}`
+          );
+          const gatos = await resp.json();
 
-                const body = document.querySelector("body")
-                if(gatos.length > 0){
-                    gatos.forEach(gato => {
-                        body.innerHTML+= `
+          const body = document.querySelector("body");
+          if (gatos.length > 0) {
+            gatos.forEach((gato) => {
+              body.innerHTML += `
                         <div class="card" style="width: 18rem;">
                             <div class="card-body  d-flex flex-column">
                                 <h5 class="card-title">${gato.nome}</h5>
@@ -57,41 +61,40 @@
                                 <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="excluir('${gato.nome}')">Exclua</button>
                             </div>
                         </div>
-                        `
-                    });
-                }else{
-                    body.innerHTML = "<h1>Você não adotou nenhum gato</h1>"
-                }
-            }catch(error){
-                alert(error.mensagem)
-            }
+                        `;
+            });
+          } else {
+            body.innerHTML = "<h1>Você não adotou nenhum gato</h1>";
+          }
+        } catch (error) {
+          alert(error.message);
         }
-        async function excluir(nomeGato){
-            console.log(nomeGato)
-            try{
-                await fetch("http://localhost:3000/deletarAdocao", {
-                    method: 'DELETE',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({nomeGato})
-                })
-                const resp = await fetch("http://localhost:3000/deletarGato", {
-                    method: 'DELETE',
-                    headers: {
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({nomeGato})
-                })
+      }
+      async function excluir(nomeGato) {
+        console.log(nomeGato);
+        try {
+          await fetch("http://localhost:3000/deletarAdocao", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nomeGato }),
+          });
+          const resp = await fetch("http://localhost:3000/deletarGato", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nomeGato }),
+          });
 
-                const men = await resp.json()
-                alert(men.mensagem)
-                carregarCard()
-            }catch(error){
-                alert(error)
-            }
-            
+          const men = await resp.json();
+          alert(men.message);
+          carregarCard();
+        } catch (error) {
+          alert(error);
         }
+      }
     </script>
-</body>
+  </body>
 </html>
