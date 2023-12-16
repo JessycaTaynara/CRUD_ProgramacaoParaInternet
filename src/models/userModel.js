@@ -38,5 +38,18 @@ class userModel {
     const usuario = await conn.query(sql, [email]);
     return usuario;
   }
+  async fazerSolicitacao(gato, emailSolicitante) {
+    const conn = await bancoDeDados.conectar();
+    const sql =
+      "INSERT INTO solicitacoes (usuario_solicitante, gato_nome, gato_sexo, gato_raca, gato_cor, gato_descricao) VALUES ($1,$2,$3,$4,$5,$6)";
+    await conn.query(sql, [
+      emailSolicitante,
+      gato.nome,
+      gato.sexo,
+      gato.raca,
+      gato.cor,
+      gato.descricao,
+    ]);
+  }
 }
 export default new userModel();

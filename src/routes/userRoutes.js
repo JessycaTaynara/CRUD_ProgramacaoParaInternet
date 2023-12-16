@@ -9,6 +9,7 @@ routes
 
   .post("/users", userController.createUser)
   .post("/adotarGato", userController.adotar)
+  .post("/fazerSolicitacao", userController.solicitarAdocao)
 
   .delete("/deletarUser/:email", userController.remove);
 

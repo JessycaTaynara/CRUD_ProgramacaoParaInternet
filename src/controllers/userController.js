@@ -9,18 +9,18 @@ class userController {
     } catch (error) {
       return res
         .status(500)
-        .send({ mensagem: `Erro ao listar usuários - ${error}` });
+        .send({ message: `Erro ao listar usuários - ${error}` });
     }
   }
   async createUser(req, res) {
     const { email, senha, nome } = req.body;
     try {
       const user = await userModel.createUser(email, senha, "comum", nome);
-      return res.status(200).send({ mensagem: "Usuário criado com sucesso" });
+      return res.status(200).send({ message: "Usuário criado com sucesso" });
     } catch (error) {
       return res
         .status(500)
-        .send({ mensagem: `Erro ao criar usuário - ${error}` });
+        .send({ message: `Erro ao criar usuário - ${error}` });
     }
   }
   async remove(req, res) {
@@ -29,11 +29,11 @@ class userController {
       const user = await userModel.find(email);
 
       if (!user) {
-        return res.status(404).send({ mensagem: "Usuário não encontrado" });
+        return res.status(404).send({ message: "Usuário não encontrado" });
       }
 
       await userModel.remove(email);
-      return res.status(200).send({ mensagem: "Usuário deletado" });
+      return res.status(200).send({ message: "Usuário deletado" });
     } catch (error) {
       return res
         .status(500)
@@ -44,9 +44,9 @@ class userController {
     const { idGato, emailDono } = req.body;
     try {
       await userModel.fazerAdocao(idGato, emailDono);
-      res.status(200).send({ mensagem: `Gato ${idGato} adotado!` });
+      res.status(200).send({ message: `Gato ${idGato} adotado!` });
     } catch (error) {
-      res.status(500).send({ mensagem: `Erro ao adotar - ${error}` });
+      res.status(500).send({ message: `Erro ao adotar - ${error}` });
     }
   }
   async getMeusGatosAdotados(req, res) {
@@ -55,9 +55,7 @@ class userController {
       const adocoes = await userModel.getMinhasAdocoes(email);
 
       if (adocoes.length == 0) {
-        return res
-          .status(500)
-          .send({ mensagem: "Você não adotou nenhum gato" });
+        return res.status(500).send({ message: "Você não adotou nenhum gato" });
       }
 
       const listaGatos = [];
@@ -71,7 +69,23 @@ class userController {
     } catch (error) {
       return res
         .status(500)
-        .send({ mensagem: `Erro ao buscar seus gatos adotados - ${error}` });
+        .send({ message: `Erro ao buscar seus gatos adotados - ${error}` });
+    }
+  }
+  async solicitarAdocao(req, res) {
+    const { gato, emailSolicicitante } = req.body;
+    try {
+      await userModel.fazerSolicitacao(gato, emailSolicicitante);
+      return res
+        .status(200)
+        .send({
+          message:
+            "Solicitação feita com sucesso! Aguarde a aprovação pelos administradores do site",
+        });
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao fazer solicitação de adoção - ${error}` });
     }
   }
 }
