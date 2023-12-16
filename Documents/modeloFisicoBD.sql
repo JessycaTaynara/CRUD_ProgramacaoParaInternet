@@ -33,6 +33,6 @@ CREATE TABLE solicitacoes(
 CREATE TABLE adocoes(
 	id_gato Int NOT NULL,
 	email_usuario VARCHAR(255) NOT NULL,
-	FOREIGN KEY (email_usuario) REFERENCES usuarios_comuns(email),
+	FOREIGN KEY (email_usuario) REFERENCES usuarios(email),
 	FOREIGN KEY (id_gato) REFERENCES gatos(id)
 );
