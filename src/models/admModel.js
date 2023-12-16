@@ -19,6 +19,11 @@ class AdmModel {
       solicitacao.gato_raca,
     ]);
   }
+  async removerSolicitacao(id) {
+    const conn = await bancoDeDados.conectar();
+    const sql = "DELETE FROM solicitacoes WHERE id = ($1)";
+    await conn.query(sql, [id]);
+  }
 }
 
 export default new AdmModel();
