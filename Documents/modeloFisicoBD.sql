@@ -26,7 +26,7 @@ CREATE TABLE solicitacoes(
 	gato_cor VARCHAR(255) NOT NULL,
 	gato_descricao VARCHAR(255) NOT NULL,
 	solicitacao_rejeitado boolean NOT NULL DEFAULT false,
-	FOREIGN KEY (usuario_solicitante) REFERENCES usuarios(email),
+	FOREIGN KEY (usuario_solicitante) REFERENCES usuarios(email)
 );
 
 /*Tabela Adocoes*/
