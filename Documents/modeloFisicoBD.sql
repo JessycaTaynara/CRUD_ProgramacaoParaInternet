@@ -19,10 +19,14 @@ CREATE TABLE gatos(
 /*Tabela Solicitacoes*/
 CREATE TABLE solicitacoes(
 	id SERIAL PRIMARY KEY, 
-	email_usuario VARCHAR(255) NOT NULL,
-	id_gato int NOT NULL,
-	FOREIGN KEY (email_usuario) REFERENCES usuarios_comuns(email),
-	FOREIGN KEY (id_gato) REFERENCES gatos(id)
+	usuario_solicitante VARCHAR(255) NOT NULL,
+	gato_nome VARCHAR(255) NOT NULL,
+	gato_sexo VARCHAR(255) NOT NULL,
+	gato_raca VARCHAR(255) NOT NULL,
+	gato_cor VARCHAR(255) NOT NULL,
+	gato_descricao VARCHAR(255) NOT NULL,
+	solicitacao_rejeitado boolean NOT NULL DEFAULT false,
+	FOREIGN KEY (usuario_solicitante) REFERENCES usuarios(email),
 );
 
 /*Tabela Adocoes*/
