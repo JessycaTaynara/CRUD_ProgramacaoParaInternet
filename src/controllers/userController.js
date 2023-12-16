@@ -16,7 +16,7 @@ class userController {
     const { email, senha, nome } = req.body;
     try {
       const user = await userModel.createUser(email, senha, "comum", nome);
-      return res.status(200).send(user);
+      return res.status(200).send({ mensagem: "Usuário criado com sucesso" });
     } catch (error) {
       return res
         .status(500)
