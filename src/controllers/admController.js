@@ -13,12 +13,11 @@ class AdmController {
   async aceitarSolicitacao(req, res) {
     const id = req.params.id;
     try {
-      const solicitacao = admModel.getSolicitacoaPorId(id);
+      const solicitacao = await admModel.getSolicitacoaPorId(id);
 
       if (!solicitacao) {
         return res.status(404).send({ message: "Solicitação não encontrada" });
       }
-
       await admModel.colocarGatoDaSolicitacaoParaAdocao(solicitacao);
       await admModel.removerSolicitacao(id);
 
