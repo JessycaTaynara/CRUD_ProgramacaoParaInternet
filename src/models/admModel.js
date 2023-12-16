@@ -8,7 +8,12 @@ class AdmModel {
     const solicitacoes = await conn.query(sql);
     return solicitacoes.rows;
   }
-
+  async getSolicitacoaPorId(id) {
+    const conn = await bancoDeDados.conectar();
+    const sql = "SELECT * FROM solicitacoes WHERE id = ($1)";
+    const solicitacao = await conn.query(sql, [id]);
+    return solicitacao.rows[0];
+  }
   async colocarGatoDaSolicitacaoParaAdocao(solicitacao) {
     //aceitar solicitação
     const conn = await bancoDeDados.conectar();
