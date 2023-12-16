@@ -29,6 +29,18 @@ class AdmController {
         .send({ message: `Erro ao aceitar solicitação - ${error}` });
     }
   }
+  async negarSolicitacao(req, res) {
+    const id = req.params.id;
+
+    try {
+      await admModel.negarSolicitacao(id);
+      return res.status(200).send({ message: "Solicitação negada" });
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao negar solicitação - ${error}` });
+    }
+  }
 }
 
 export default new AdmController();
