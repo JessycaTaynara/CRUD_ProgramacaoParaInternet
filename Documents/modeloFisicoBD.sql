@@ -7,7 +7,7 @@ CREATE TABLE usuarios (
 );
 
 /*Tabela gatos*/
-CREATE TABLE gatos(
+CREATE TABLE gatos_para_adotar(
 	nome VARCHAR(255) NOT NULL,
 	sexo VARCHAR(255) NOT NULL,
 	raca VARCHAR(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE solicitacoes(
 	gato_raca VARCHAR(255) NOT NULL,
 	gato_cor VARCHAR(255) NOT NULL,
 	gato_descricao VARCHAR(255) NOT NULL,
-	solicitacao_rejeitado boolean NOT NULL DEFAULT false,
+	solicitacao_rejeitada boolean NOT NULL DEFAULT false,
 	FOREIGN KEY (usuario_solicitante) REFERENCES usuarios(email)
 );
 
