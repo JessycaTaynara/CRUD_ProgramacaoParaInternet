@@ -3,10 +3,12 @@ import bancoDeDados from "../database/index.js";
 class AdmModel {
   async getSolicitacoes() {
     const conn = await bancoDeDados.conectar();
-    const sql = "SELECT * FROM solicitacoes";
+    const sql =
+      "SELECT * FROM solicitacoes WHERE solicitacao_rejeitada = false";
     const solicitacoes = await conn.query(sql);
     return solicitacoes.rows;
   }
+
   async colocarGatoDaSolicitacaoParaAdocao(solicitacao) {
     //aceitar solicitação
     const conn = await bancoDeDados.conectar();
