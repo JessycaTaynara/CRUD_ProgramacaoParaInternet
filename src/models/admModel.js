@@ -18,7 +18,7 @@ class AdmModel {
     //aceitar solicitação
     const conn = await bancoDeDados.conectar();
     const sql =
-      "INSERT INTO gatos (nome, sexo, cor, descricao, raca) VALUES ($1,$2,$3,$4,$5)";
+      "INSERT INTO gatos_para_adotar (nome, sexo, cor, descricao, raca) VALUES ($1,$2,$3,$4,$5)";
     await conn.query(sql, [
       solicitacao.gato_nome,
       solicitacao.gato_sexo,
