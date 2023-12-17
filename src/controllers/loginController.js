@@ -13,8 +13,12 @@ class authController {
           .send({ message: "Dados incorretos ou sem cadastro" });
       }
 
-      const token = jwt.sign({ email: user.email, nome: user.nome }, "jessyca");
-      return res.status(200).send({ message: "Logado com sucesso", token });
+      const token = jwt.sign(
+        { email: user.email, nome: user.nome, tipo: user.tipo },
+        "jessyca",
+        { expiresIn: "1h" }
+      );
+      return res.status(200).send({ token });
     } catch (error) {
       return res.status(404).send({ message: `Erro ao logar - ${error}` });
     }
