@@ -1,13 +1,14 @@
 import { Router } from "express";
 import admController from "../controllers/admController.js";
+import { checkrole } from "../middleware/checkrole.js";
 
 const routes = new Router();
 
 routes
-  .get("/solicitacoes", admController.getSolicitacoes)
+  .get("/solicitacoes", checkrole(["adm"]), admController.getSolicitacoes)
 
-  .post("/aceitarSolicitacao/:id", admController.aceitarSolicitacao)
+  .post("/aceitarSolicitacao/:id", checkrole(["adm"]), admController.aceitarSolicitacao)
 
-  .put("/negarSolicitacao/:id", admController.negarSolicitacao);
+  .put("/negarSolicitacao/:id", checkrole(["adm"]), admController.negarSolicitacao);
 
 export default routes;
