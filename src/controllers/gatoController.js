@@ -10,35 +10,35 @@ class gatoController {
       res.status(500).send({ message: `Erro ao adicionar um gato - ${error}` });
     }
   }
-  async getGatos(req, res) {
+  async getGatosParaAdotar(req, res) {
     try {
-      const gatos = await gatoModel.getGatos();
+      const gatos = await gatoModel.getGatosParaAdocao();
       res.status(200).send(gatos);
     } catch (error) {
       res.status(404).send({ message: `Erro ao listar gatos - ${error}` });
     }
   }
   async excluirGato(req, res) {
-    const { nomeGato } = req.body;
-    console.log(nomeGato);
+    const id = req.params.id;
+
     try {
-      await gatoModel.deleteGato(nomeGato);
+      await gatoModel.deleteGato(id);
       res.status(200).send({ message: "Gato excluido" });
     } catch (error) {
       res.status(404).send({ message: `Erro ao deletar gato - ${error}` });
     }
   }
   async deletarAdocao(req, res) {
-    const { nomeGato } = req.body;
+    const id = req.params.id;
     try {
-      await gatoModel.deletarAdocao(nomeGato);
+      await gatoModel.deletarAdocao(id);
       res.status(200).send({ message: "adocao excluida" });
     } catch (error) {
       res.status(404).send({ message: `Erro ao deletar adocao - ${error}` });
     }
   }
   async editarGato(req, res) {
-    const { nomeAntigo, novoNome, idade, sexo, raca, cor, descricao } =
+    const { nomeAntigo, novoNome, idade, sexo, raca, cor, descricao, id } =
       req.body;
     try {
       await gatoModel.update(
@@ -48,7 +48,8 @@ class gatoController {
         sexo,
         raca,
         cor,
-        descricao
+        descricao,
+        id
       );
       return res.status(200).send({ message: "Gato atualizado com sucesso!" });
     } catch (error) {

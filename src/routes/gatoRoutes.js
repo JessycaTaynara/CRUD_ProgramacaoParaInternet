@@ -5,10 +5,11 @@ const routes = new Router();
 
 routes
   .post("/addGato", gatoController.addGato)
-  .get("/gatos", gatoController.getGatos)
+  .get("/gatos", gatoController.getGatosParaAdotar)
 
-  .delete("/deletarGato", gatoController.excluirGato)
-  .delete("/deletarAdocao", gatoController.deletarAdocao)
+  .delete("/deletarGato/:id", gatoController.excluirGato)
+  .delete("/deletarAdocao/:id", gatoController.deletarAdocao)
 
   .put("/atualizarGato", gatoController.editarGato);
+
 export default routes;
