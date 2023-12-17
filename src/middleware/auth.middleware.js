@@ -1,15 +1,15 @@
-const UserModel = require("../models/user.model");
-const jwt = require("jsonwebtoken");
+import userModel from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  const encoded = req.headers.authorization.split(' ')[1];
+  const encoded = req.headers.authorization.split(" ")[1];
   try {
     const decoded = jwt.verify(encoded, "jessyca");
 
-    const user = await UserModel.find(decoded.id);
+    const user = await userModel.find(decoded.id);
     if (!user) {
       return res.status(401).json({ message: "Unauthorized" });
     }
@@ -18,6 +18,6 @@ const auth = async (req, res, next) => {
   }
 
   next();
-}
+};
 
-module.exports = auth;
+export default auth;
