@@ -9,6 +9,8 @@ const auth = async (req, res, next) => {
   try {
     const decoded = jwt.verify(encoded, "jessyca");
 
+    req.tipo = decoded.tipo;
+
     const user = await userModel.find(decoded.id);
     if (!user) {
       return res.status(401).json({ message: "Unauthorized" });
