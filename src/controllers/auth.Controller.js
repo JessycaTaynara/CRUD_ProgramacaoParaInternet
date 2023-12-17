@@ -7,8 +7,10 @@ class authController {
     try {
       const user = await authModel.login(email, senha);
 
-      if (user.length == 0) {
-        return res.status(404).send({ message: "Email ou senha incorretos" });
+      if (!user) {
+        return res
+          .status(404)
+          .send({ message: "Dados incorretos ou sem cadastro" });
       }
 
       const token = jwt.sign({ email: user.email, nome: user.nome }, "jessyca");
