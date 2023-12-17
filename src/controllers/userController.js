@@ -76,16 +76,32 @@ class userController {
     const { gato, emailSolicicitante } = req.body;
     try {
       await userModel.fazerSolicitacao(gato, emailSolicicitante);
-      return res
-        .status(200)
-        .send({
-          message:
-            "Solicitação feita com sucesso! Aguarde a aprovação pelos administradores do site",
-        });
+      return res.status(200).send({
+        message:
+          "Solicitação feita com sucesso! Aguarde a aprovação pelos administradores do site",
+      });
     } catch (error) {
       return res
         .status(500)
         .send({ message: `Erro ao fazer solicitação de adoção - ${error}` });
+    }
+  }
+  async getMinhasSolicitacoes(req, res) {
+    const email = req.params.email;
+    try {
+      const solicitacoes = await userModel.getMinhasSolicitacoes(email);
+
+      if (solicitacoes.length === 0) {
+        return res
+          .status(404)
+          .send({ message: "Você ainda não fez nenhuma solicitação" });
+      }
+
+      return res.status(200).json(solicitacoes);
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao buscar suas solicitações - ${error}` });
     }
   }
 }

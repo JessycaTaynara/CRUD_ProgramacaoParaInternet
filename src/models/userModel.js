@@ -51,5 +51,11 @@ class userModel {
       gato.descricao,
     ]);
   }
+  async getMinhasSolicitacoes(email) {
+    const conn = await bancoDeDados.conectar();
+    const sql = "SELECT * FROM solicitacoes WHERE usuario_solicitante = ($1)";
+    const solicitacoes = await conn.query(sql, [email]);
+    return solicitacoes.rows;
+  }
 }
 export default new userModel();
