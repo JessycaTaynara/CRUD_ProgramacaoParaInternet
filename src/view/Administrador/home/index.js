@@ -91,10 +91,6 @@ function mostrarAlerta(mensagem, tipo){
   
     texto.innerHTML = mensagem
 }
-async function logout(){
-    localStorage.clear()
-    window.location.href = '../login.html';
-}
 async function getGatoPorId(id){
   try {
     const respostaApi = await fetch(`${urlBase}/buscarGatoPorId/${id}`, {
@@ -157,4 +153,8 @@ async function editar(){
   } catch (error) {
     mostrarAlerta(error.message, "erro")
   }
+}
+async function logout(){
+  localStorage.clear()
+  window.location.href = '../../../../login.html';
 }
