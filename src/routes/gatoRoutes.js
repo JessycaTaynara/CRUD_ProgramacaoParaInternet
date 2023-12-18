@@ -13,6 +13,6 @@ routes
   .delete("/deletarGato/:id", checkrole(["adm"]), gatoController.excluirGato)
   .delete("/deletarAdocao/:id", checkrole(["adm"]), gatoController.deletarAdocao)
 
-  .put("/atualizarGato", checkrole(["adm"]), gatoController.editarGato);
+  .put("/editarGato", checkrole(["adm"]), gatoController.editar);
 
 export default routes;

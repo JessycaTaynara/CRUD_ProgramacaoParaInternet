@@ -37,25 +37,6 @@ class gatoController {
       res.status(404).send({ message: `Erro ao deletar adocao - ${error}` });
     }
   }
-  async editarGato(req, res) {
-    const { nomeAntigo, novoNome, idade, sexo, raca, cor, descricao, id } =
-      req.body;
-    try {
-      await gatoModel.update(
-        nomeAntigo,
-        novoNome,
-        idade,
-        sexo,
-        raca,
-        cor,
-        descricao,
-        id
-      );
-      return res.status(200).send({ message: "Gato atualizado com sucesso!" });
-    } catch (error) {
-      res.status(500).send({ message: `Erro ao atualizar gato - ${error}` });
-    }
-  }
   async gatoPorId(req, res) {
     const id = req.params.id;
     try {
@@ -74,6 +55,43 @@ class gatoController {
       return res
         .status(500)
         .send({ message: `Erro ao buscar gato - ${error}` });
+    }
+  }
+  async editar(req, res) {
+    const { nome, raca, cor, descricao, sexo, id } = req.body;
+
+    if (!nome) {
+      return res.status(400).send({ message: "Informe o nome do gato" });
+    } else if (!raca) {
+      return res.status(400).send({ message: "Informe a raça do gato" });
+    } else if (!cor) {
+      return res.status(400).send({ message: "Informe a cor do gato" });
+    } else if (!descricao) {
+      return res
+        .status(400)
+        .send({ message: "é necessário uma pequena descrição para o gato" });
+    } else if (!sexo) {
+      return res.status(400).send({ message: "Informe o sexo do gato" });
+    }
+
+    try {
+      const gatoAtualizado = await gatoModel.update(
+        nome,
+        sexo,
+        raca,
+        cor,
+        descricao,
+        id
+      );
+      if (!gatoAtualizado) {
+        return res
+          .status(404)
+          .send({ message: "Gato não encontrado no sistema" });
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao atualizar gato - ${error}` });
     }
   }
 }
