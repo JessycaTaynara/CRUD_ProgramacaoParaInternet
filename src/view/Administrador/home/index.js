@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async function (){
 
 async function listarGatosParaAdocao(){
   try {
-    const respostaApi = await fetch("http://localhost:3000/gatos", {
+    const respostaApi = await fetch(`${urlBase}/gatos`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -97,7 +97,7 @@ async function logout(){
 }
 async function getGatoPorId(id){
   try {
-    const respostaApi = await fetch(`http://localhost:3000/buscarGatoPorId/${id}`, {
+    const respostaApi = await fetch(`${urlBase}/buscarGatoPorId/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -138,7 +138,7 @@ async function editar(){
   const descricao = document.querySelector("input#descricao").value
 
   try {
-    const respostaApi = await fetch("http://localhost:3000/editarGato/",{
+    const respostaApi = await fetch(`${urlBase}/editarGato/`,{
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
