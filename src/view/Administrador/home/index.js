@@ -143,7 +143,7 @@ async function editar(){
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({nome, cor, raca, descricao})
+      body: JSON.stringify({nome, cor, raca, descricao, id})
     })
 
     const retorno = await respostaApi.json()
