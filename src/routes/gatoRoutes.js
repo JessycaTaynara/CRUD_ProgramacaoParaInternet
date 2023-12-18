@@ -5,8 +5,10 @@ import { checkrole } from "../middleware/checkrole.js";
 const routes = new Router();
 
 routes
-  .post("/addGato", checkrole(["adm"]), gatoController.addGato)
   .get("/gatos", checkrole(["adm", "comum"]), gatoController.getGatosParaAdotar)
+  .get("/gatoPorId/:id", checkrole(["adm"]), gatoController.gatoPorId)
+
+  .post("/addGato", checkrole(["adm"]), gatoController.addGato)
 
   .delete("/deletarGato/:id", checkrole(["adm"]), gatoController.excluirGato)
   .delete("/deletarAdocao/:id", checkrole(["adm"]), gatoController.deletarAdocao)

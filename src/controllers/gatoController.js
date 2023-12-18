@@ -56,6 +56,26 @@ class gatoController {
       res.status(500).send({ message: `Erro ao atualizar gato - ${error}` });
     }
   }
+  async gatoPorId(req, res) {
+    const id = req.params.id;
+    try {
+      if (!id) {
+        return res.status(400).send({ message: "ID do gato não identificado" });
+      }
+
+      const gato = await gatoModel.getGatoPorId(id);
+
+      if (!gato) {
+        return res.status(404).send({ message: "Gato não encontrado" });
+      }
+
+      return res.status(200).json(gato);
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao buscar gato - ${error}` });
+    }
+  }
 }
 
 export default new gatoController();
