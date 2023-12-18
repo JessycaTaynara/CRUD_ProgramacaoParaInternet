@@ -2,7 +2,7 @@ const urlBase = "http://localhost:3000"
 const token = localStorage.getItem("token")
 
 document.addEventListener("DOMContentLoaded", async function (){
-    await listarGatosParaAdocao()
+    await showGatosParaAdotar()
 })
 
 async function listarGatosParaAdocao(){
@@ -28,6 +28,8 @@ async function showGatosParaAdotar(){
   const gatos = await listarGatosParaAdocao()
   const gatosContainer = document.querySelector("main.gatosParaAdotar")
 
+  gatosContainer.innerHTML= ""
+
   if(gatos.lenght > 0){
     for(let gato of gatos){
       gatosContainer.innerHTML+= `
@@ -52,6 +54,10 @@ async function showGatosParaAdotar(){
                     <p>${gato.descricao}</p>
                 </li>
             </ul>
+            <div class="d-flex justify-content-around mt-4">
+              <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="preenherFormsDeEdicao(${gato.id})"><i class="bi bi-pencil-fill icones"></i></div>
+              <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="excluirGato(${gato.id})"><i class="bi bi-trash icones"></i></div>
+            </div>
           </div>
         </div>
       `
@@ -88,4 +94,67 @@ function mostrarAlerta(mensagem, tipo){
 async function logout(){
     localStorage.clear()
     window.location.href = '../login.html';
+}
+async function getGatoPorId(id){
+  try {
+    const respostaApi = await fetch(`http://localhost:3000/buscarGatoPorId/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    })
+
+    const gato = await respostaApi.json()
+
+    if(respostaApi.ok){
+      return gato
+    }else{
+      mostrarAlerta(gato.message, "erro")
+    }
+  } catch (error) {
+    mostrarAlerta(error.message, "erro")
+  }
+}
+let idDoGatoParaEditar;
+
+async function preenherFormsDeEdicao(id){
+  idDoGatoParaEditar = id
+  const gato = await getGatoPorId(id)
+
+  const nome = document.querySelector("input#nome")
+  const cor = document.querySelector("input#cor")
+  const raca = document.querySelector("input#raca")
+  const descricao = document.querySelector("input#descricao")
+
+  nome.value = gato.nome
+  cor.value = gato.cor
+  raca.value = gato.raca
+  descricao.value = gato.descricao
+}
+async function editar(){
+  const nome = document.querySelector("input#nome").value
+  const cor = document.querySelector("input#cor").value
+  const raca = document.querySelector("input#raca").value
+  const descricao = document.querySelector("input#descricao").value
+
+  try {
+    const respostaApi = await fetch("http://localhost:3000/editarGato/",{
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({nome, cor, raca, descricao})
+    })
+
+    const retorno = await respostaApi.json()
+
+    if(respostaApi.ok){
+      mostrarAlerta(retorno.message, "sucesso")
+      await showGatosParaAdotar()
+    }else{
+      mostrarAlerta(retorno.message, "erro")
+    }
+  } catch (error) {
+    mostrarAlerta(error.message, "erro")
+  }
 }
