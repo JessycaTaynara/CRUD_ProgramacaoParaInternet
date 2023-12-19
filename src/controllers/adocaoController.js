@@ -14,7 +14,7 @@ class AdocaoController {
       const listaDeAdocoes = [];
 
       for (let adocao of adocoes) {
-        const dono = userModel.userPorId(adocao.email_usuario);
+        const dono = userModel.userPorEmail(adocao.email_usuario);
 
         if (!dono) {
           return res.status(404).send({ message: `Dono não encontrado` });
@@ -42,7 +42,7 @@ class AdocaoController {
     const { idGato, emailDono } = req.body;
     try {
       await adocaoModel.fazerAdocao(idGato, emailDono);
-      res.status(200).send({ message: `Gato ${idGato} adotado!` });
+      res.status(200).send({ message: `Gato adotado!` });
     } catch (error) {
       res.status(500).send({ message: `Erro ao adotar - ${error}` });
     }
