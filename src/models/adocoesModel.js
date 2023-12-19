@@ -15,8 +15,9 @@ class AdocaoModel {
   }
   async fazerAdocao(idGato, emailDono) {
     const conn = await bancoDeDados.conectar();
-    const sql1 = "INSERT INTO adocoes (email_dono, idGato) VALUES ($1, $2)";
-    const sql2 = "UPDATE gatos SET adotado = true WHERE id = ($1)";
+    const sql1 = "INSERT INTO adocoes (email_dono, id_gato) VALUES ($1, $2)";
+    const sql2 =
+      "UPDATE gatos_para_adotar   SET adotado = true WHERE id = ($1)";
     await conn.query(sql1, [emailDono, idGato]);
     await conn.query(sql2, [idGato]);
   }
