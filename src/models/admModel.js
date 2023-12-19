@@ -8,12 +8,6 @@ class AdmModel {
     const solicitacoes = await conn.query(sql);
     return solicitacoes.rows;
   }
-  async getSolicitacoaPorId(id) {
-    const conn = await bancoDeDados.conectar();
-    const sql = "SELECT * FROM solicitacoes WHERE id = ($1)";
-    const solicitacao = await conn.query(sql, [id]);
-    return solicitacao.rows[0];
-  }
   async colocarGatoDaSolicitacaoParaAdocao(solicitacao) {
     //aceitar solicitação
     const conn = await bancoDeDados.conectar();
@@ -26,17 +20,6 @@ class AdmModel {
       solicitacao.gato_descricao,
       solicitacao.gato_raca,
     ]);
-  }
-  async removerSolicitacao(id) {
-    const conn = await bancoDeDados.conectar();
-    const sql = "DELETE FROM solicitacoes WHERE id = ($1)";
-    await conn.query(sql, [id]);
-  }
-  async negarSolicitacao(id) {
-    const conn = await bancoDeDados.conectar();
-    const sql =
-      "UPDATE solicitacoes SET solicitacao_rejeitada = true WHERE id = ($1)";
-    conn.query(sql, [id]);
   }
 }
 
