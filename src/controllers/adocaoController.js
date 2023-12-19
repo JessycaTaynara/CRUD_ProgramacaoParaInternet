@@ -1,6 +1,6 @@
-import adocaoModel from "../models/adocoesModel";
-import gatoModel from "../models/gatoModel";
-import userModel from "../models/userModel";
+import adocaoModel from "../models/adocoesModel.js";
+import gatoModel from "../models/gatoModel.js";
+import userModel from "../models/userModel.js";
 
 class AdocaoController {
   async getAdocoes(req, res) {
