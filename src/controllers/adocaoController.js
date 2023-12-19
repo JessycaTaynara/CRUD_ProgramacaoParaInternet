@@ -14,13 +14,14 @@ class AdocaoController {
       const listaDeAdocoes = [];
 
       for (let adocao of adocoes) {
-        const dono = userModel.userPorEmail(adocao.email_usuario);
+        console.log(adocao);
+        const dono = await userModel.userPorEmail(adocao.email_usuario);
 
         if (!dono) {
           return res.status(404).send({ message: `Dono não encontrado` });
         }
 
-        const gato = gatoModel.getGatoPorId(adocao.id_gato);
+        const gato = await gatoModel.getGatoPorId(adocao.id_gato);
 
         if (!gato) {
           return res
