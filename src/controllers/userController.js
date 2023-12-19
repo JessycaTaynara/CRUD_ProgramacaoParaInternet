@@ -39,6 +39,21 @@ class userController {
         .send({ message: "Erro ao remover usuário - " + error });
     }
   }
+  async buscarUserPorEmail(req, res) {
+    const email = req.params.email;
+
+    if (!email) {
+      return res.status(400).send({ message: "informe o email" });
+    }
+
+    const usuario = await userModel.userPorEmail(email);
+
+    if (!usuario) {
+      return res.status(404).send({ message: "Usuário não encontrado" });
+    }
+
+    return res.status(200).json(usuario);
+  }
 }
 
 export default new userController();

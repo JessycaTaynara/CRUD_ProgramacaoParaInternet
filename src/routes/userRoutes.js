@@ -6,6 +6,7 @@ const routes = new Router();
 
 routes
   .get("/usuarios", checkrole(["adm"]), userController.show)
+  .get("/getUserPorEmail/:email", checkrole(["comum", "adm"]), userController.buscarUserPorEmail)
 
   .post("/users", userController.createUser)
 

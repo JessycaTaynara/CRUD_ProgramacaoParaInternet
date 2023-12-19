@@ -23,7 +23,7 @@ class userModel {
     const conn = await bancoDeDados.conectar();
     const sql = "SELECT * FROM usuarios WHERE email=($1)";
     const usuario = await conn.query(sql, [email]);
-    return usuario;
+    return usuario.rows[0];
   }
 }
 export default new userModel();
