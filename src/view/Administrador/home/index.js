@@ -55,8 +55,8 @@ async function showGatosParaAdotar(){
                 </li>
             </ul>
             <div class="d-flex justify-content-around mt-4">
-              <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="preenherFormsDeEdicao(${gato.id})"><i class="bi bi-pencil-fill icones"></i></div>
-              <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="excluirGato(${gato.id})"><i class="bi bi-trash icones"></i></div>
+              <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="preenherFormsDeEdicao('${gato.id}')"><i class="bi bi-pencil-fill icones"></i></div>
+              <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="excluirGato('${gato.id}')"><i class="bi bi-trash icones"></i></div>
             </div>
           </div>
         </div>
@@ -132,6 +132,7 @@ async function editar(){
   const cor = document.querySelector("input#cor").value
   const raca = document.querySelector("input#raca").value
   const descricao = document.querySelector("input#descricao").value
+  const sexo = document.querySelector("input#sexo")
 
   try {
     const respostaApi = await fetch(`${urlBase}/editarGato/`,{
@@ -139,7 +140,7 @@ async function editar(){
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({nome, cor, raca, descricao, id})
+      body: JSON.stringify({nome, cor, raca, descricao, sexo, id})
     })
 
     const retorno = await respostaApi.json()
@@ -149,6 +150,28 @@ async function editar(){
       await showGatosParaAdotar()
     }else{
       mostrarAlerta(retorno.message, "erro")
+    }
+  } catch (error) {
+    mostrarAlerta(error.message, "erro")
+  }
+}
+async function excluirGato(id){
+  try {
+    const respostaApi = await fetch(`${urlBase}/deletarGato/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    })
+
+    const mensagemApi = await respostaApi.json()
+
+    if(!respostaApi.ok){
+      mostrarAlerta(mensagemApi.message, "alerta")
+    }else{
+      await showGatosParaAdotar()
+      mostrarAlerta(mensagemApi.message, "sucesso")
     }
   } catch (error) {
     mostrarAlerta(error.message, "erro")
