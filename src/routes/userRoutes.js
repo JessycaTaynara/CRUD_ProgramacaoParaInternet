@@ -8,8 +8,6 @@ routes
   .get("/usuarios", checkrole(["adm"]), userController.show)
 
   .post("/users", userController.createUser)
-  
-  .post("/fazerSolicitacao", checkrole(["comum"]), userController.solicitarAdocao)
 
   .delete("/deletarUser/:email", checkrole(["comum"]), userController.remove);
 
