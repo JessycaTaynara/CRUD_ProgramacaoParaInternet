@@ -19,20 +19,7 @@ class userModel {
     const sql = "DELETE FROM usuarios where email=($1);";
     return await conn.query(sql, [email]);
   }
-  async getMinhasAdocoes(email) {
-    const conn = await bancoDeDados.conectar();
-    const sql = "SELECT * FROM adocoes WHERE email_dono = ($1)";
-    const adocoes = await conn.query(sql, [email]);
-    return adocoes.rows;
-  }
-  async fazerAdocao(idGato, emailDono) {
-    const conn = await bancoDeDados.conectar();
-    const sql1 = "INSERT INTO adocoes (email_dono, idGato) VALUES ($1, $2)";
-    const sql2 = "UPDATE gatos SET adotado = true WHERE id = ($1)";
-    await conn.query(sql1, [emailDono, idGato]);
-    await conn.query(sql2, [idGato]);
-  }
-  async find(email) {
+  async userPorEmail(email) {
     const conn = await bancoDeDados.conectar();
     const sql = "SELECT * FROM usuarios WHERE email=($1)";
     const usuario = await conn.query(sql, [email]);

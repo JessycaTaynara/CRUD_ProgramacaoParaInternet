@@ -40,38 +40,6 @@ class userController {
         .send({ message: "Erro ao remover usuário - " + error });
     }
   }
-  async adotar(req, res) {
-    const { idGato, emailDono } = req.body;
-    try {
-      await userModel.fazerAdocao(idGato, emailDono);
-      res.status(200).send({ message: `Gato ${idGato} adotado!` });
-    } catch (error) {
-      res.status(500).send({ message: `Erro ao adotar - ${error}` });
-    }
-  }
-  async getMeusGatosAdotados(req, res) {
-    const email = req.params.email;
-    try {
-      const adocoes = await userModel.getMinhasAdocoes(email);
-
-      if (adocoes.length == 0) {
-        return res.status(500).send({ message: "Você não adotou nenhum gato" });
-      }
-
-      const listaGatos = [];
-
-      for (let adocao of adocoes) {
-        const dadosDoGato = await gatoModel.getGatoPorId(adocao.gato.id);
-        listaGatos.push(dadosDoGato);
-      }
-
-      return res.status(200).send(listaGatos);
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: `Erro ao buscar seus gatos adotados - ${error}` });
-    }
-  }
   async solicitarAdocao(req, res) {
     const { gato, emailSolicicitante } = req.body;
     try {
