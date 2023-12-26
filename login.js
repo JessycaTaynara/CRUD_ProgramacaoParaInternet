@@ -20,11 +20,12 @@ async function login() {
     });
 
     const tokenData = await response.json();
+    const token = tokenData.token
 
-    if (tokenData.token) {
+    if (token) {
       // Login bem-sucedido
       localStorage.clear();
-      localStorage.setItem("token", tokenData.token);
+      localStorage.setItem("token", token);
 
       const payload = JSON.parse(atob(decodeURIComponent(token.split(".")[1])));
 
