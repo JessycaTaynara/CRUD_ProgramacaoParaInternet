@@ -18,7 +18,7 @@ class authController {
         "jessyca",
         { expiresIn: "1h" }
       );
-      return res.status(200).send({ token });
+      return res.status(200).send({ token: token });
     } catch (error) {
       return res.status(404).send({ message: `Erro ao logar - ${error}` });
     }
