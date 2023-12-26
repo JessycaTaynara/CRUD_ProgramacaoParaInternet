@@ -8,7 +8,7 @@ routes
   .get("/usuarios", checkrole(["adm"]), userController.show)
   .get("/getUserPorEmail/:email", checkrole(["comum", "adm"]), userController.buscarUserPorEmail)
 
-  .post("/users", userController.createUser)
+  .post("/cadastrarUsuarioComum", userController.createUser)
 
   .delete("/deletarUser/:email", checkrole(["comum"]), userController.remove);
 
