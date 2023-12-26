@@ -60,7 +60,7 @@ class AdocaoController {
       const listaGatos = [];
 
       for (let adocao of adocoes) {
-        const dadosDoGato = await gatoModel.getGatoPorId(adocao.gato.id);
+        const dadosDoGato = await gatoModel.getGatoPorId(adocao.id_gato);
         listaGatos.push(dadosDoGato);
       }
 
