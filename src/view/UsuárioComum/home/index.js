@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   }
   async function logout(){
     localStorage.clear()
-    window.location.href = '../login.html';
+    window.location.href = '../../../../login.html';
   }
   function mostrarAlerta(mensagem, tipo){
     const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
