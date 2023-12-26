@@ -89,7 +89,7 @@ async function cadastrar(){
     if(retorno.ok){
       mostrarAlerta(mensagemDeRetorno.message, "sucesso")
     }else{
-      mostrarAlerta(mensagemDeRetorno, "erro")
+      mostrarAlerta(mensagemDeRetorno.message, "erro")
     }
   } catch (error) {
     mostrarAlerta(error, "erro")
