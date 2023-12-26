@@ -69,10 +69,11 @@ function mostrarAlerta(mensagem, tipo){
   texto.innerHTML = mensagem
 }
 async function cadastrar(){
+  const nome = prompt("Digite seu nome")
   const email = document.querySelector("input#email").value
   const senha = document.querySelector("input#senha").value
 
-  const data = {email, senha}
+  const data = {email, senha, nome}
 
   try {
     const retorno = await fetch(`${urlBase}/cadastrarUsuarioComum`,{
