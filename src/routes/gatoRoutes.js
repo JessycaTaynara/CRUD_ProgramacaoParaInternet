@@ -1,13 +1,18 @@
 import { Router } from "express";
 import gatoController from "../controllers/gatoController.js";
+import { checkrole } from "../middleware/checkrole.js";
 
-const routes = new Router()
+const routes = new Router();
 
 routes
-    .post('/addGato', gatoController.addGato)
-    .get('/gatos', gatoController.getGatos)
-    .get('/meusGatosAdotados/:email', gatoController.getSeuGatosAdotados)
-    .delete('/deletarGato', gatoController.excluirGato)
-    .delete('/deletarAdocao', gatoController.deletarAdocao)
-    .put('/atualizarGato', gatoController.editarGato)
-export default routes
+  .get("/gatos", checkrole(["adm", "comum"]), gatoController.getGatosParaAdotar)
+  .get("/gatoPorId/:id", checkrole(["adm"]), gatoController.gatoPorId)
+
+  .post("/addGato", checkrole(["adm"]), gatoController.addGato)
+
+  .delete("/deletarGato/:id", checkrole(["adm"]), gatoController.excluirGato)
+  .delete("/deletarAdocao/:id", checkrole(["adm"]), gatoController.deletarAdocao)
+
+  .put("/editarGato", checkrole(["adm"]), gatoController.editar);
+
+export default routes;

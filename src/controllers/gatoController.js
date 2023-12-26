@@ -1,71 +1,99 @@
 import gatoModel from "../models/gatoModel.js";
-import userModel from "../models/userModel.js";
 
 class gatoController {
   async addGato(req, res) {
     const { nome, idade, sexo, raca, cor, descricao } = req.body;
     try {
-        await gatoModel.adicionar_gato(nome, idade, sexo, raca, cor, descricao)
-        res.status(200).send({mensagem: "Gato adicionado"})
+      await gatoModel.adicionarGato(nome, idade, sexo, raca, cor, descricao);
+      res.status(200).send({ message: "Gato adicionado" });
     } catch (error) {
-      res.status(500).send({ mensagem: `Erro ao adicionar um gato - ${error}` });
+      res.status(500).send({ message: `Erro ao adicionar um gato - ${error}` });
     }
   }
-  async getGatos(req, res){
-    try{
-      const gatos = await gatoModel.get_gatos()
-      res.status(200).send(gatos)
-    }catch(error){
-      res.status(404).send({mensagem: `Erro ao listar gatos - ${error}`})
+  async getGatosParaAdotar(req, res) {
+    try {
+      const gatos = await gatoModel.getGatosParaAdocao();
+      res.status(200).send(gatos);
+    } catch (error) {
+      res.status(404).send({ message: `Erro ao listar gatos - ${error}` });
     }
   }
-  async getSeuGatosAdotados(req, res){
-    const email = req.params.email
-    console.log("seusGatos")
-    try{
-      const adocoes = await userModel.getAdocoes(email)
-      if(adocoes.length == 0){
-        return res.status(500).send({mensagem: "Você não adotou nenhum gato"})
+  async excluirGato(req, res) {
+    const id = req.params.id;
+
+    try {
+      await gatoModel.deleteGato(id);
+      res.status(200).send({ message: "Gato excluido" });
+    } catch (error) {
+      res.status(404).send({ message: `Erro ao deletar gato - ${error}` });
+    }
+  }
+  async deletarAdocao(req, res) {
+    const id = req.params.id;
+    try {
+      await gatoModel.deletarAdocao(id);
+      res.status(200).send({ message: "adocao excluida" });
+    } catch (error) {
+      res.status(404).send({ message: `Erro ao deletar adocao - ${error}` });
+    }
+  }
+  async gatoPorId(req, res) {
+    const id = req.params.id;
+    try {
+      if (!id) {
+        return res.status(400).send({ message: "ID do gato não identificado" });
       }
-      const listaGatos = []
-      for(let adocao of adocoes){
-        const dadosDoGato = await gatoModel.get_gato_por_nome(adocao.gato)
-        listaGatos.push(dadosDoGato)
+
+      const gato = await gatoModel.getGatoPorId(id);
+
+      if (!gato) {
+        return res.status(404).send({ message: "Gato não encontrado" });
       }
-      
-      return res.status(200).send(listaGatos)
-    }catch(error){
-      return res.status(500).send({mensagem: `Erro ao buscar seus gatos adotados - ${error}`})
+
+      return res.status(200).json(gato);
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao buscar gato - ${error}` });
     }
   }
-  async excluirGato(req, res){
-    const {nomeGato} = req.body
-    console.log(nomeGato)
-    try{
-      await gatoModel.deleteGato(nomeGato)
-      res.status(200).send({mensagem: "Gato excluido"})
-    }catch(error){
-      res.status(404).send({mensagem: `Erro ao deletar gato - ${error}`})
+  async editar(req, res) {
+    const { nome, raca, cor, descricao, sexo, id } = req.body;
+
+    if (!nome) {
+      return res.status(400).send({ message: "Informe o nome do gato" });
+    } else if (!raca) {
+      return res.status(400).send({ message: "Informe a raça do gato" });
+    } else if (!cor) {
+      return res.status(400).send({ message: "Informe a cor do gato" });
+    } else if (!descricao) {
+      return res
+        .status(400)
+        .send({ message: "é necessário uma pequena descrição para o gato" });
+    } else if (!sexo) {
+      return res.status(400).send({ message: "Informe o sexo do gato" });
     }
-  }
-  async deletarAdocao(req, res){
-    const {nomeGato} = req.body
-    try{
-      await gatoModel.deletarAdocao(nomeGato)
-      res.status(200).send({mensagem: "adocao excluida"})
-    }catch(error){
-      res.status(404).send({mensagem: `Erro ao deletar adocao - ${error}`})
-    }
-  }
-  async editarGato( req, res){
-    const {nomeAntigo, novoNome, idade, sexo, raca, cor, descricao} = req.body
-    try{
-      await gatoModel.update(nomeAntigo, novoNome, idade, sexo, raca, cor, descricao)
-      return res.status(200).send({mensagem: "Gato atualizado com sucesso!"})
-    }catch(error){
-      res.status(500).send({mensagem: `Erro ao atualizar gato - ${error}`})
+
+    try {
+      const gatoAtualizado = await gatoModel.update(
+        nome,
+        sexo,
+        raca,
+        cor,
+        descricao,
+        id
+      );
+      if (!gatoAtualizado) {
+        return res
+          .status(404)
+          .send({ message: "Gato não encontrado no sistema" });
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .send({ message: `Erro ao atualizar gato - ${error}` });
     }
   }
 }
 
-export default new gatoController()
+export default new gatoController();
