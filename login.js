@@ -24,7 +24,6 @@ async function login() {
 
     if (token) {
       // Login bem-sucedido
-      localStorage.clear();
       localStorage.setItem("token", token);
 
       const payload = JSON.parse(atob(decodeURIComponent(token.split(".")[1])));
