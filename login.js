@@ -29,9 +29,9 @@ async function login() {
       const payload = JSON.parse(atob(decodeURIComponent(token.split(".")[1])));
 
       if(payload.tipo === "adm"){
-        window.location.assign("./src/Administrador/home/index.html");
+        window.location.assign("./src/view/Administrador/home/index.html");
       }else if(payload.tipo === "comum"){
-        window.location.assign("./src/UsuárioComum/home/index.html");
+        window.location.assign("./src/view/UsuárioComum/home/index.html");
       }else{
         mostrarAlerta("Erro ao reconhecer tipo do usuário", "erro")
       }
