@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", async ()=>{
                     </li>
                   </ul>
                   <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar('${gato.id}')">Adote</button>
-                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato('${gato.id}')">Edite</button>
                 </div>
               </div>
               `
