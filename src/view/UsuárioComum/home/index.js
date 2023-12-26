@@ -1,5 +1,9 @@
 const token = localStorage.getItem("token")
-exibirGatos();
+
+document.addEventListener("DOMContentLoaded", async ()=>{
+  await exibirGatos();
+})
+
   async function exibirGatos() {
     try{
       var r = await fetch('http://localhost:3000/gatos', {
@@ -12,7 +16,7 @@ exibirGatos();
       const caixa = document.querySelector('div.container');
       caixa.innerHTML="";
 
-      if(gatos.lenght === 0){
+      if(gatos.length === 0){
         caixa.innerHTML = "<h1>Não há gatos para adotar, adicione</h1>"
       }else{
         gatos.forEach(gato => {
@@ -39,8 +43,8 @@ exibirGatos();
                       <p>${gato.descricao}</p>
                     </li>
                   </ul>
-                  <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar('${gato.nome}')">Adote</button>
-                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato('${gato.nome}')">Edite</button>
+                  <button type="button" class="btn btn-secondary mb-2 mt-2" onclick="adotar('${gato.id}')">Adote</button>
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modal2" onclick="editarGato('${gato.id}')">Edite</button>
                 </div>
               </div>
               `
@@ -51,20 +55,27 @@ exibirGatos();
       mostrarAlerta(error.message, "erro");
     }
   }
-  async function adotar(nomeGato) {
+  async function adotar(idGato) {
     const token = localStorage.getItem('token')
-    const emailDono = (JSON.parse(atob(token.split(".")[1]))).email
+    const payload = JSON.parse(atob(token.split(".")[1]))
+    const emailDono = payload.email
     try{
       const resp = await fetch('http://localhost:3000/adotarGato', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({nomeGato, emailDono})
+        body: JSON.stringify({idGato, emailDono})
       })
       const mensagem = await resp.json()
-      mostrarAlerta(mensagem.message, "sucesso")
-      exibirGatos();
+
+      if(resp.ok){
+        mostrarAlerta(mensagem.message, "sucesso")
+        await exibirGatos();
+      }else{
+        mostrarAlerta(mensagem.message, "erro")
+      }
     }catch(error){
       mostrarAlerta(error.message, "erro")
     }
