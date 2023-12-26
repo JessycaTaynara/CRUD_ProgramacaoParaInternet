@@ -48,7 +48,7 @@ exibirGatos();
         })
       }
     }catch(error) {
-      mostrarAlerta(error.mensagem, "erro");
+      mostrarAlerta(error.message, "erro");
     }
   }
   async function adotar(nomeGato) {
@@ -63,10 +63,10 @@ exibirGatos();
         body: JSON.stringify({nomeGato, emailDono})
       })
       const mensagem = await resp.json()
-      mostrarAlerta(mensagem.mensagem, "sucesso")
+      mostrarAlerta(mensagem.message, "sucesso")
       exibirGatos();
     }catch(error){
-      mostrarAlerta(error.mensagem, "erro")
+      mostrarAlerta(error.message, "erro")
     }
   }
   async function logout(){
