@@ -6,6 +6,7 @@ const routes = new Router();
 
 routes
   .get("/adocoes", checkrole(["adm"]), adocaoController.getAdocoes)
+  .get("/minhasAdocoes/:email", checkrole(["adm", "comum"]), adocaoController.getMeusGatosAdotados)
 
   .post("/adotarGato", checkrole(["comum"]), adocaoController.adotar);
 
