@@ -1,5 +1,4 @@
 import userModel from "../models/userModel.js";
-import gatoModel from "../models/gatoModel.js";
 
 class userController {
   async show(req, res) {
@@ -40,69 +39,20 @@ class userController {
         .send({ message: "Erro ao remover usuário - " + error });
     }
   }
-  async adotar(req, res) {
-    const { idGato, emailDono } = req.body;
-    try {
-      await userModel.fazerAdocao(idGato, emailDono);
-      res.status(200).send({ message: `Gato ${idGato} adotado!` });
-    } catch (error) {
-      res.status(500).send({ message: `Erro ao adotar - ${error}` });
-    }
-  }
-  async getMeusGatosAdotados(req, res) {
+  async buscarUserPorEmail(req, res) {
     const email = req.params.email;
-    try {
-      const adocoes = await userModel.getMinhasAdocoes(email);
 
-      if (adocoes.length == 0) {
-        return res.status(500).send({ message: "Você não adotou nenhum gato" });
-      }
-
-      const listaGatos = [];
-
-      for (let adocao of adocoes) {
-        const dadosDoGato = await gatoModel.getGatoPorId(adocao.gato.id);
-        listaGatos.push(dadosDoGato);
-      }
-
-      return res.status(200).send(listaGatos);
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: `Erro ao buscar seus gatos adotados - ${error}` });
+    if (!email) {
+      return res.status(400).send({ message: "informe o email" });
     }
-  }
-  async solicitarAdocao(req, res) {
-    const { gato, emailSolicicitante } = req.body;
-    try {
-      await userModel.fazerSolicitacao(gato, emailSolicicitante);
-      return res.status(200).send({
-        message:
-          "Solicitação feita com sucesso! Aguarde a aprovação pelos administradores do site",
-      });
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: `Erro ao fazer solicitação de adoção - ${error}` });
-    }
-  }
-  async getMinhasSolicitacoes(req, res) {
-    const email = req.params.email;
-    try {
-      const solicitacoes = await userModel.getMinhasSolicitacoes(email);
 
-      if (solicitacoes.length === 0) {
-        return res
-          .status(404)
-          .send({ message: "Você ainda não fez nenhuma solicitação" });
-      }
+    const usuario = await userModel.userPorEmail(email);
 
-      return res.status(200).json(solicitacoes);
-    } catch (error) {
-      return res
-        .status(500)
-        .send({ message: `Erro ao buscar suas solicitações - ${error}` });
+    if (!usuario) {
+      return res.status(404).send({ message: "Usuário não encontrado" });
     }
+
+    return res.status(200).json(usuario);
   }
 }
 

@@ -88,6 +88,7 @@ class gatoController {
           .status(404)
           .send({ message: "Gato não encontrado no sistema" });
       }
+      return res.status(200).json(gatoAtualizado);
     } catch (error) {
       return res
         .status(500)
