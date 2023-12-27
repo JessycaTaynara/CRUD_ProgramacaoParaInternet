@@ -7,6 +7,7 @@ import administrador from "./src/routes/admRoutes.js";
 import authMiddleware from "./src/middleware/auth.middleware.js";
 import solicitacoes from "./src/routes/solicitacoesRoutes.js";
 import adocoes from "./src/routes/adocoesRoutes.js";
+import cadastro from "./src/routes/cadastroRoute.js"
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(
   cors("*"),
   express.json(),
   login,
+  cadastro,
   authMiddleware,
   usuario,
   gato,
