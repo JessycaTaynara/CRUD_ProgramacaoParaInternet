@@ -73,4 +73,4 @@ function mostrarAlerta(mensagem, tipo){
     }
   
     texto.innerHTML = mensagem
-  }
+}
