@@ -30,7 +30,7 @@ async function showGatosParaAdotar(){
 
   gatosContainer.innerHTML= ""
 
-  if(gatos.lenght > 0){
+  if(gatos.length > 0){
     for(let gato of gatos){
       gatosContainer.innerHTML+= `
         <div class="card" style="width: 18rem;">
