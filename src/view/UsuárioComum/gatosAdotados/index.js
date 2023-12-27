@@ -17,7 +17,7 @@ async function carregarCard(){
         if(gatos.length > 0){
             gatos.forEach(gato => {
                 main.innerHTML+= `
-                <div class="card" style="width: 18rem; height: 300px">
+                <div class="card mr-4" style="width: 18rem; height: 300px">
                     <div class="card-body  d-flex flex-column">
                         <h5 class="card-title">${gato.nome}</h5>
                         <ul class="list-group">
