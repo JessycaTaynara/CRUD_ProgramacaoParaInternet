@@ -14,7 +14,7 @@ class authController {
       }
 
       const token = jwt.sign(
-        { email: user.email, nome: user.nome, tipo: user.tipo },
+        { email: user.email, tipo: user.tipo },
         "jessyca",
         { expiresIn: "1h" }
       );
