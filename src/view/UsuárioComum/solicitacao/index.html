@@ -16,46 +16,52 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    header{
+      width: 100%;
+    }
   </style>
 </head>
 <body class="d-flex flex-column align-items-center">
+  <header class="d-flex justify-content-start">
+    <a href="../home/index.html"><img src="../../assets/icons8-seta-longa-à-esquerda-30.png"></a>
+  </header>
     <div class="alert alert-dismissible fade show d-none" role="alert" id="caixaDeAlerta">
         <strong id="mensagemDeAlerta"></strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="container mt-5">
         <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="form-container">
-            <h2 class="text-center mb-4">Cadastro de Animal Para Adoção</h2>
-            <div>
-                <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" name="nome">
+          <div class="col-md-6">
+              <div class="form-container">
+              <h2 class="text-center mb-4">Cadastro de Animal Para Adoção</h2>
+              <div>
+                  <div class="form-group">
+                  <label for="nome">Nome:</label>
+                  <input type="text" class="form-control" id="nome" name="nome">
+                  </div>
+                  <div class="form-group">
+                  <label for="cor">Cor:</label>
+                  <input type="text" class="form-control" id="cor" name="cor">
+                  </div>
+                  <div class="form-group">
+                  <label for="raca">Raça:</label>
+                  <input type="text" class="form-control" id="raca" name="raca">
+                  </div>
+                  <div class="form-group">
+                  <label for="sexo">Sexo:</label>
+                  <select class="form-control" id="sexo" name="sexo">
+                      <option value="macho">Macho</option>
+                      <option value="femea">Fêmea</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                  <label for="descricao">Descrição:</label>
+                  <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary" onclick="solicitar()">Enviar</button>
                 </div>
-                <div class="form-group">
-                <label for="cor">Cor:</label>
-                <input type="text" class="form-control" id="cor" name="cor">
-                </div>
-                <div class="form-group">
-                <label for="raca">Raça:</label>
-                <input type="text" class="form-control" id="raca" name="raca">
-                </div>
-                <div class="form-group">
-                <label for="sexo">Sexo:</label>
-                <select class="form-control" id="sexo" name="sexo">
-                    <option value="macho">Macho</option>
-                    <option value="femea">Fêmea</option>
-                </select>
-                </div>
-                <div class="form-group">
-                <label for="descricao">Descrição:</label>
-                <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
-                </div>
-                <button class="btn btn-primary" onclick="solicitar()">Enviar</button>
               </div>
-            </div>
-        </div>
+          </div>
         </div>
     </div>
   <script  src="./index.js"></script>
