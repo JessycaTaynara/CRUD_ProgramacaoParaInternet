@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body class="d-flex flex-column">
   <header class="text-white py-3" style="background-color: #D291BC;">
     <nav class="navbar navbar-expand-lg p-3 d-flex justify-content-around align-items-center" style="background-color: #D291BC;">
       <div class="d-flex align-items-center">
@@ -22,6 +22,10 @@
       
     </nav>
   </header>
+  <div class="alert alert-dismissible fade show d-none" role="alert" id="caixaDeAlerta">
+    <strong id="mensagemDeAlerta"></strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <main class="d-flex d-flex flex-wrap justify-content-around gatosParaAdotar p-4"></main>
   <!--MODAL DE EDIÇÃO DE GATO-->
   <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,9 +49,13 @@
                 <input type="text" class="form-control" id="raca">
             </div>
             <div class="mb-3">
-              <label for="sexo" class="form-label">Sexo:</label>
-              <input type="text" class="form-control" id="sexo">
-          </div>
+              <label for="sexo" class="form-label">Sexo</label>
+              <select class="form-control" id="sexo" name="sexo">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="macho">Macho</option>
+                <option value="femea">Fêmea</option>
+              </select>
+            </div>            
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
                 <input type="text" class="form-control" id="descricao">
