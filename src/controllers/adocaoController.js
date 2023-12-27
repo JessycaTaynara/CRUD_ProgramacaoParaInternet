@@ -14,7 +14,6 @@ class AdocaoController {
       const listaDeAdocoes = [];
 
       for (let adocao of adocoes) {
-        console.log(adocao);
         const dono = await userModel.userPorEmail(adocao.email_usuario);
 
         if (!dono) {
