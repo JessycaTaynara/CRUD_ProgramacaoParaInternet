@@ -80,7 +80,7 @@ async function mostrarSolicitacoes(){
         }else{
             for(let solicitacao of solicitacoes){
                 const dono = await getDono(solicitacao.usuario_solicitante)
-                if(solicitacao.solicitacao_rejeitada == false){
+                if(solicitacao.solicitacao_rejeitada == false && solicitacao.solicitacao_aceita == false){
                     main.innerHTML += `
                     <div class="card m-3" style="width: 18rem;">
                         <div class="card-body  d-flex flex-column">
@@ -161,7 +161,7 @@ async function negarSolicitacao(id){
 
         if(retornoApi.ok){
             mostrarAlerta(mensagem.message, "sucesso")
-            await mostrarSolicitacoes()
+            mostrarSolicitacoes()
         }else{
             mostrarAlerta(mensagem.message, "erro")
         }
