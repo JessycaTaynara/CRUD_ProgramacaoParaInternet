@@ -25,6 +25,7 @@ async function listarGatosParaAdocao(){
   }
 }
 async function showGatosParaAdotar(){
+  mostrarTelaDeLoading()
   const gatos = await listarGatosParaAdocao()
   const gatosContainer = document.querySelector("main.gatosParaAdotar")
 
@@ -65,6 +66,7 @@ async function showGatosParaAdotar(){
   }else{
     gatosContainer.innerHTML = "<h1>Nenhum gato para adotar foi cadastrado</h1>"
   }
+  fecharTelaDeLoading()
 }
 function mostrarAlerta(mensagem, tipo){
     const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
@@ -121,26 +123,29 @@ async function preenherFormsDeEdicao(id){
   const cor = document.querySelector("input#cor")
   const raca = document.querySelector("input#raca")
   const descricao = document.querySelector("input#descricao")
+  const sexo = document.querySelector("select#sexo")
 
   nome.value = gato.nome
   cor.value = gato.cor
   raca.value = gato.raca
   descricao.value = gato.descricao
+  sexo.value = gato.sexo
 }
 async function editar(){
   const nome = document.querySelector("input#nome").value
   const cor = document.querySelector("input#cor").value
   const raca = document.querySelector("input#raca").value
   const descricao = document.querySelector("input#descricao").value
-  const sexo = document.querySelector("input#sexo")
+  const sexo = document.querySelector("select#sexo").value
 
   try {
-    const respostaApi = await fetch(`${urlBase}/editarGato/`,{
+    const respostaApi = await fetch(`${urlBase}/editarGato/${idDoGatoParaEditar}`,{
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({nome, cor, raca, descricao, sexo, id})
+      body: JSON.stringify({nome, cor, raca, descricao, sexo})
     })
 
     const retorno = await respostaApi.json()
@@ -154,6 +159,7 @@ async function editar(){
   } catch (error) {
     mostrarAlerta(error.message, "erro")
   }
+  fecharModal("modalEdicao")
 }
 async function excluirGato(id){
   try {
@@ -180,4 +186,17 @@ async function excluirGato(id){
 async function logout(){
   localStorage.clear()
   window.location.href = '../../../../login.html';
+}
+function mostrarTelaDeLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.display = 'flex';
+}
+function fecharTelaDeLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.display = 'none';
+}
+function fecharModal(modalEscolhido) {
+  modalParaFechar = document.querySelector(`#${modalEscolhido}`);
+  const modal = bootstrap.Modal.getInstance(modalParaFechar);
+  modal.hide();
 }
