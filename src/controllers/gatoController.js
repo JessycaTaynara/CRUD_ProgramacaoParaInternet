@@ -2,9 +2,9 @@ import gatoModel from "../models/gatoModel.js";
 
 class gatoController {
   async addGato(req, res) {
-    const { nome, idade, sexo, raca, cor, descricao } = req.body;
+    const { nome, sexo, raca, cor, descricao } = req.body;
     try {
-      await gatoModel.adicionarGato(nome, idade, sexo, raca, cor, descricao);
+      await gatoModel.adicionarGato(nome, sexo, raca, cor, descricao);
       res.status(200).send({ message: "Gato adicionado" });
     } catch (error) {
       res.status(500).send({ message: `Erro ao adicionar um gato - ${error}` });
