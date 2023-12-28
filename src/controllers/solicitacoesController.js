@@ -1,4 +1,5 @@
 import solicitacoesModel from "../models/solicitacoesModel.js";
+import admModel from "../models/admModel.js";
 
 class SolicitacoesController {
   async solicitarAdocao(req, res) {

@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gatitos Para Adotar</title>
+  <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
 </head>
 <body style="height: 100vh;">
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loader"></div>
+  </div>
   <header class="text-white py-3" style="background-color: #D291BC;">
     <nav class="navbar navbar-expand-lg p-3 d-flex justify-content-around align-items-center" style="background-color: #D291BC;">
       <div class="d-flex align-items-center">
@@ -16,6 +20,7 @@
         <a href="../gatosAdotados/index.html" class="mr-3"><button type="button" class="btn btn-light">Meus Gatos Adotados</button></a>
         <a href="../gatosAdotados/index.html" class="mr-3"><button type="button" class="btn btn-light">Minhas Solicitações</button></a>
         <a href="../solicitacao/index.html" class="mr-3"><button type="button" class="btn btn-light">Fazer Uma Solicitação Para Adoção</button></a>
+        <a href="../minhasSolicitacoes/index.html" class="mr-3"><button type="button" class="btn btn-light">Minhas Solicitações</button></a>
         <button type="button" class="btn btn-light" onclick="logout()">Sair</button>
       </div>
     </nav>
