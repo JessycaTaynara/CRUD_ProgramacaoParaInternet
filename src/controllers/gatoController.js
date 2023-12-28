@@ -58,7 +58,8 @@ class gatoController {
     }
   }
   async editar(req, res) {
-    const { nome, raca, cor, descricao, sexo, id } = req.body;
+    const { nome, raca, cor, descricao, sexo} = req.body;
+    const id = req.params.id
 
     if (!nome) {
       return res.status(400).send({ message: "Informe o nome do gato" });
