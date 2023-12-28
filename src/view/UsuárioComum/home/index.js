@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 })
 
   async function exibirGatos() {
+    mostrarTelaDeLoading()
     try{
       var r = await fetch('http://localhost:3000/gatos', {
         headers: {
@@ -51,8 +52,10 @@ document.addEventListener("DOMContentLoaded", async ()=>{
         })
       }
     }catch(error) {
+      fecharTelaDeLoading()
       mostrarAlerta(error.message, "erro");
     }
+    fecharTelaDeLoading()
   }
   async function adotar(idGato) {
     const token = localStorage.getItem('token')
@@ -108,4 +111,12 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   
     texto.innerHTML = mensagem
   }
+function mostrarTelaDeLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.display = 'flex';
+}
+function fecharTelaDeLoading() {
+  const loadingScreen = document.getElementById('loadingScreen');
+  loadingScreen.style.display = 'none';
+}
   

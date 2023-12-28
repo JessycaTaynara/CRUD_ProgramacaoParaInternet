@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     await carregarCard()
 });
 async function carregarCard(){
+    mostrarTelaDeLoading()
     const token = localStorage.getItem('token')
     const email = (JSON.parse(atob(token.split(".")[1]))).email
     try{
@@ -46,8 +47,10 @@ async function carregarCard(){
             main.innerHTML = "<h1>Você não adotou nenhum gato</h1>"
         }
     }catch(error){
+        fecharTelaDeLoading()
         mostrarAlerta(error.mensagem, "erro")
     }
+    fecharTelaDeLoading()
 }
 function mostrarAlerta(mensagem, tipo){
     const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
@@ -73,4 +76,12 @@ function mostrarAlerta(mensagem, tipo){
     }
   
     texto.innerHTML = mensagem
+}
+function mostrarTelaDeLoading() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'flex';
+  }
+function fecharTelaDeLoading() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'none';
 }
