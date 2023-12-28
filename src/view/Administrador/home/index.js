@@ -64,6 +64,7 @@ async function showGatosParaAdotar(){
       `
     }
   }else{
+    fecharTelaDeLoading()
     gatosContainer.innerHTML = "<h1>Nenhum gato para adotar foi cadastrado</h1>"
   }
   fecharTelaDeLoading()
@@ -174,12 +175,14 @@ async function excluirGato(id){
     const mensagemApi = await respostaApi.json()
 
     if(!respostaApi.ok){
+      fecharTelaDeLoading()
       mostrarAlerta(mensagemApi.message, "alerta")
     }else{
       await showGatosParaAdotar()
       mostrarAlerta(mensagemApi.message, "sucesso")
     }
   } catch (error) {
+    fecharTelaDeLoading()
     mostrarAlerta(error.message, "erro")
   }
 }
