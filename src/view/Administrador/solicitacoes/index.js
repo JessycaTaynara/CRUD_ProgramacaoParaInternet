@@ -143,10 +143,32 @@ async function aceitarSolicitacao(id){
         mostrarAlerta(error.message, "erro")
     }
 }
+async function negarSolicitacao(id){
+    try {
+        const retornoApi = await fetch(`http//localhost:3000/negarSolicitacao/${id}`, {
+            method: "PUT",
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+        const mensagem = await retornoApi.json()
+
+        if(retornoApi.ok){
+            mostrarAlerta(mensagem.message, "sucesso")
+            await mostrarSolicitacoes()
+        }else{
+            mostrarAlerta(mensagem.message, "erro")
+        }
+    } catch (error) {
+        mostrarAlerta(error.message, "erro")
+    }
+}
 function mostrarTelaDeLoading() {
     const loadingScreen = document.getElementById('loadingScreen');
     loadingScreen.style.display = 'flex';
-  }
+}
 function fecharTelaDeLoading() {
     const loadingScreen = document.getElementById('loadingScreen');
     loadingScreen.style.display = 'none';
