@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", async function (){
 const token = localStorage.getItem("token")
 
 async function gerarCardsGatosAdotados(){
+    mostrarTelaDeLoading()
     const main = document.querySelector("main")
     main.innerHTML = ""
     try {
@@ -43,6 +44,7 @@ async function gerarCardsGatosAdotados(){
     } catch (error) {
         mostrarAlerta(error.message, "erro")
     }
+    fecharTelaDeLoading()
 }
 function mostrarAlerta(mensagem, tipo){
     const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
@@ -83,4 +85,13 @@ async function getGatosAdotados(){
     }else{
         return await retornoGatosAdotados.json()
     }
+}
+function mostrarTelaDeLoading() {
+    console.log("entrou")
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'flex';
+}
+function fecharTelaDeLoading() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'none';
 }
