@@ -53,7 +53,7 @@ class SolicitacoesController {
         return res.status(404).send({ message: "Solicitação não encontrada" });
       }
       await admModel.colocarGatoDaSolicitacaoParaAdocao(solicitacao);
-      await solicitacoesModel.removerSolicitacao(id);
+      await solicitacoesModel.aceitarSolicitacao(id);
 
       return res.status(200).send({ message: "Solicitação aceita" });
     } catch (error) {

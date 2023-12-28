@@ -33,9 +33,9 @@ class SolicitacoesMode {
 
     return solicitacoes.rows;
   }
-  async removerSolicitacao(id) {
+  async aceitarSolicitacao(id){
     const conn = await bancoDeDados.conectar();
-    const sql = "DELETE FROM solicitacoes WHERE id = ($1)";
+    const sql = "UPDATE solicitacoes SET solicitacao_aceita = true WHERE id = ($1)";
     await conn.query(sql, [id]);
   }
   async negarSolicitacao(id) {
