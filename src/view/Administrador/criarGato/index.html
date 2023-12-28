@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAG - Criar Gato</title>
+    <!-- Adicionando o Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #D291BC;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body class="pb-4">
+    <header class="d-flex justify-content-start p-2" style="width: 100%;">
+        <a href="../home/index.html" style="border: 1px solid white; border-radius: 5px;" class="p-2"><img src="../../assets/icons8-seta-longa-à-esquerda-30.png" alt="ícone de seta branca virada pra esquerda"></a>
+    </header>
+    <div class="alert alert-dismissible fade show d-none" role="alert" id="caixaDeAlerta">
+        <strong id="mensagemDeAlerta"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="text-center mb-2">Formulário de Adoção de Gato</h2>
+            <div>
+                <div class="mb-2">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="cor" class="form-label">Cor:</label>
+                    <input type="text" class="form-control" id="cor" name="cor" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="raca" class="form-label">Raça:</label>
+                    <input type="text" class="form-control" id="raca" name="raca" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="descricao" class="form-label">Descrição:</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="4" required></textarea>
+                </div>
+
+                <div class="mb-2">
+                    <label for="sexo" class="form-label">Sexo:</label>
+                    <select class="form-select" id="sexo" name="sexo" required>
+                        <option value="Macho">Macho</option>
+                        <option value="Fêmea">Fêmea</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="criarGato()">Criar Gato Para Adoção</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
