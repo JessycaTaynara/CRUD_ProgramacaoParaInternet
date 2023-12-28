@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async function (){
 })
 
 const token = localStorage.getItem("token")
-console.log(token)
 
 function mostrarAlerta(mensagem, tipo){
     const caixaDeAlerta = document.querySelector("div#caixaDeAlerta")
@@ -52,8 +51,10 @@ async function getSolicitacoes(){
 async function getDono(email){
     try {
         const retorno = await fetch(`http://localhost:3000/getUserPorEmail/${email}`, {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         })
         if(retorno.ok){
             const dono = await retorno.json()
@@ -100,6 +101,10 @@ async function mostrarSolicitacoes(){
                             Solicitado por:
                             <span class="badge bg-primary rounded-pill">${dono}</span>
                         </li>
+                        <div class="d-flex justify-content-around mt-4">
+                            <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="aceitarSolicitacao('${solicitacao.id}')"><i class="bi bi-check-lg"></i></div>
+                            <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="negarSolicitacao('${solicitacao.id}')"><i class="bi bi-x-lg"></i></div>
+                        </div>
                     </ul>
                 </div>
             </div>
