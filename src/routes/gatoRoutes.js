@@ -6,13 +6,13 @@ const routes = new Router();
 
 routes
   .get("/gatos", checkrole(["adm", "comum"]), gatoController.getGatosParaAdotar)
-  .get("/gatoPorId/:id", checkrole(["adm"]), gatoController.gatoPorId)
+  .get("/buscarGatoPorId/:id", checkrole(["adm"]), gatoController.gatoPorId)
 
   .post("/addGato", checkrole(["adm"]), gatoController.addGato)
 
   .delete("/deletarGato/:id", checkrole(["adm"]), gatoController.excluirGato)
   .delete("/deletarAdocao/:id", checkrole(["adm"]), gatoController.deletarAdocao)
 
-  .put("/editarGato", checkrole(["adm"]), gatoController.editar);
+  .put("/editarGato/:id", checkrole(["adm"]), gatoController.editar);
 
 export default routes;
