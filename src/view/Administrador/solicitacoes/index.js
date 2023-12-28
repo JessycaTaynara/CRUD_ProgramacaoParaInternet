@@ -80,40 +80,45 @@ async function mostrarSolicitacoes(){
         }else{
             for(let solicitacao of solicitacoes){
                 const dono = await getDono(solicitacao.usuario_solicitante)
-                main.innerHTML += `
-                <div class="card m-3" style="width: 18rem;">
-                    <div class="card-body  d-flex flex-column">
-                        <h5 class="card-title">${solicitacao.gato_nome}</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Sexo
-                                <span class="badge bg-primary rounded-pill">${solicitacao.gato_sexo}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Raça
-                                <span class="badge bg-primary rounded-pill">${solicitacao.gato_raca}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Cor
-                                <span class="badge bg-primary rounded-pill">${solicitacao.gato_cor}</span>
-                            </li>
-                            <li class="list-group-item d-flex flex-column justify-content-between align-items-center">
-                                <strong>Descrição:</strong>
-                                <p>${solicitacao.gato_descricao}</p>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Solicitado por:
-                                <span class="badge bg-primary rounded-pill">${dono}</span>
-                            </li>
-                            <div class="d-flex justify-content-around mt-4">
-                                <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="aceitarSolicitacao('${solicitacao.id}')"><i class="bi bi-check-lg"></i></div>
-                                <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="negarSolicitacao('${solicitacao.id}')"><i class="bi bi-x-lg"></i></div>
-                            </div>
-                        </ul>
+                if(solicitacao.solicitacao_rejeitada == false){
+                    main.innerHTML += `
+                    <div class="card m-3" style="width: 18rem;">
+                        <div class="card-body  d-flex flex-column">
+                            <h5 class="card-title">${solicitacao.gato_nome}</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Sexo
+                                    <span class="badge bg-primary rounded-pill">${solicitacao.gato_sexo}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Raça
+                                    <span class="badge bg-primary rounded-pill">${solicitacao.gato_raca}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Cor
+                                    <span class="badge bg-primary rounded-pill">${solicitacao.gato_cor}</span>
+                                </li>
+                                <li class="list-group-item d-flex flex-column justify-content-between align-items-center">
+                                    <strong>Descrição:</strong>
+                                    <p>${solicitacao.gato_descricao}</p>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Solicitado por:
+                                    <span class="badge bg-primary rounded-pill">${dono}</span>
+                                </li>
+                                <div class="d-flex justify-content-around mt-4">
+                                    <div class="botoes bg-success" data-bs-toggle="modal" data-bs-target="#modalEdicao" onclick="aceitarSolicitacao('${solicitacao.id}')"><i class="bi bi-check-lg"></i></div>
+                                    <div class="botoes bg-danger" data-bs-toggle="modal" data-bs-target="#modalExclusao" onclick="negarSolicitacao('${solicitacao.id}')"><i class="bi bi-x-lg"></i></div>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                `
+                    `
+                }
             }
+        }
+        if(main.innerHTML === ""){
+            main.innerHTML = "<h2>Nenhum usuário fez solicitações de gatos para adoção</h2>"
         }
     } catch (error) {
         fecharTelaDeLoading()
