@@ -42,7 +42,7 @@ class SolicitacoesMode {
     const conn = await bancoDeDados.conectar();
     const sql =
       "UPDATE solicitacoes SET solicitacao_rejeitada = true WHERE id = ($1)";
-    conn.query(sql, [id]);
+    await conn.query(sql, [id]);
   }
 }
 
