@@ -145,14 +145,13 @@ async function aceitarSolicitacao(id){
 }
 async function negarSolicitacao(id){
     try {
-        const retornoApi = await fetch(`http//localhost:3000/negarSolicitacao/${id}`, {
+        const retornoApi = await fetch(`http://localhost:3000/negarSolicitacao/${id}`, {
             method: "PUT",
             headers:{
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         })
-
         const mensagem = await retornoApi.json()
 
         if(retornoApi.ok){
