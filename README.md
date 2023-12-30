@@ -6,6 +6,11 @@ O Sistema de Adoção de Gatos é uma plataforma que permite aos usuários adota
 
 ## Funcionalidades do Usuário Comum👤
 
+_Para acessar como Usuário Comum use:_
+
+- _**Email:** comum@gmail.com_
+- _**Senha:** 123_
+
 ### 1. Adoção de Gatos😻
 
 Os usuários podem criar uma conta e explorar gatos disponíveis para adoção. Eles podem visualizar informações sobre cada gato, como idade, personalidade. Ao decidir adotar um gato, os usuários podem iniciar o processo de adoção.
@@ -15,6 +20,11 @@ Os usuários podem criar uma conta e explorar gatos disponíveis para adoção. 
 Usuários podem informar aos Usuários Administradores da página sobre gatos que querem colocar para adoção.
 
 ## Funcionalidades do Usuário Administrador👮‍♀️
+
+_Para acessar como Administrador use:_
+
+- _**Email:** adm@gmail.com_
+- _**Senha:** 123_
 
 ### 1. Controle dos Gatos Exibidos🐱‍👓
 
