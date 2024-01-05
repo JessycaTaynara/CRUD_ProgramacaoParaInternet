@@ -12,6 +12,7 @@ CREATE TABLE gatos_para_adotar(
 	sexo VARCHAR(255) NOT NULL,
 	raca VARCHAR(255) NOT NULL,
 	cor VARCHAR(255) NOT NULL,
+	adotado BOOLEAN DEFAULT false
 	descricao VARCHAR(255) NOT NULL,
 	id SERIAL PRIMARY KEY 
 );
